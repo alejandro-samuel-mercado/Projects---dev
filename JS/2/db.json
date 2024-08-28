@@ -1,0 +1,54 @@
+{
+  "profesores": [
+    {
+      "nombre": "Ale",
+      "apellido": "Mercado",
+      "materias": [
+        {
+          "nombre": "Node"
+        },
+        {
+          "nombre": "React"
+        }
+      ],
+      "id": "86d6"
+    },
+    {
+      "id": "f514",
+      "nombre": "Agu",
+      "apellido": "Cars",
+      "materias": [
+        {
+          "nombre": "PC"
+        },
+        {
+          "nombre": "React Ts"
+        }
+      ]
+    },
+    {
+      "id": "b336",
+      "nombre": "Agu",
+      "apellido": "Cars",
+      "materias": [
+        {
+          "nombre": "PC"
+        },
+        {
+          "nombre": "React Ts"
+        },
+        {
+          "nombre": "Mongo db"
+        }
+      ]
+    }
+  ],
+  "alumnos": [
+    {
+      "nombre": "María",
+      "apellido": "sasa",
+      "promedio": 8.2,
+      "id": "bd83"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "workbench.colorCustomizations": {
+    "editor.guides.indentation": "#C0C0C0",
+    "editor.guides.activeIndentation": "#A0A0A0"
+  },
+  "editor.guides.indentation": true
+}
