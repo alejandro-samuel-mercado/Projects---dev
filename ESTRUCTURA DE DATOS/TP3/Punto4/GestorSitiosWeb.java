@@ -70,7 +70,7 @@ public class GestorSitiosWeb {
         boolean encontrado = false;
 
         for (SitioWeb sitio : historialNavegacion) {
-            if (sitio.getTipo().equalsIgnoreCase(tipo)) { // Comparación ignorando mayúsculas y minúsculas
+            if (sitio.getTipo().equalsIgnoreCase(tipo)) {
                 sitiosPorTipo += sitio.toString() + "\n";
                 encontrado = true;
             }
