@@ -1,8 +1,6 @@
 package TP3.Punto3;
 
 import javax.swing.*;
-import java.util.List;
-
 import TP3.Stack;
 
 public class GPS {
