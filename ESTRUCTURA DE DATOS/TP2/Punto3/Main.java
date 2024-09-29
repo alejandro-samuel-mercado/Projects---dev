@@ -3,8 +3,7 @@ package TP2.Punto3;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-
-import com.milibreria.utilidades.validaciones;
+import TP2.validaciones;
 
 public class Main {
     public static void main(String[] args) {

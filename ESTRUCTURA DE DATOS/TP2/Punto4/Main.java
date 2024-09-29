@@ -1,6 +1,6 @@
 package TP2.Punto4;
 
-import com.milibreria.utilidades.validaciones;
+import TP2.validaciones;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;

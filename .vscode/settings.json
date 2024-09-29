@@ -1,9 +1,8 @@
 {
-    "jdk.advanced.disable.nbjavac": false,
-    "java.project.sourcePaths": [
-        "ESTRUCTURA DE DATOS"
-    ],
-    "java.project.referencedLibraries": [
-        "/home/oem/TRABAJOS/ESTRUCTURA DE DATOS/validaciones.jar"
-    ]
+  "jdk.advanced.disable.nbjavac": false,
+  "java.project.sourcePaths": ["ESTRUCTURA DE DATOS"],
+  "java.project.referencedLibraries": [
+    "/home/oem/TRABAJOS/ESTRUCTURA DE DATOS/validaciones.jar",
+    "libs/milibreria.jar"
+  ]
 }

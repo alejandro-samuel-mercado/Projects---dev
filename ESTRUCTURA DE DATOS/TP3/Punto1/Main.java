@@ -1,6 +1,6 @@
 package TP3.Punto1;
 
-import com.milibreria.utilidades.validaciones;
+import TP2.validaciones;
 import javax.swing.*;
 
 class Main {

@@ -1,126 +1,133 @@
 {
-    // Use IntelliSense para saber los atributos posibles.
-    // Mantenga el puntero para ver las descripciones de los existentes atributos.
-    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "java",
-            "name": "Main",
-            "request": "launch",
-            "mainClass": "TP2.Punto4.Main",
-            "projectName": "TRABAJOS_9d691805"
-        },
-        {
-            "type": "java",
-            "name": "Current File",
-            "request": "launch",
-            "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "Clase1",
-            "request": "launch",
-            "mainClass": "Clase1",
-            "projectName": "TRABAJOS_9d691805"
-        },
-        {
-            "type": "java",
-            "name": "Clase2",
-            "request": "launch",
-            "mainClass": "Clase2",
-            "projectName": "TRABAJOS_9d691805"
-        },
-        {
-            "type": "java",
-            "name": "Punto1",
-            "request": "launch",
-            "mainClass": "TP0.Punto1",
-            "projectName": "TRABAJOS_9d691805"
-        },
-        {
-            "type": "java",
-            "name": "Punto2",
-            "request": "launch",
-            "mainClass": "TP0.Punto2",
-            "projectName": "TRABAJOS_9d691805"
-        },
-        {
-            "type": "java",
-            "name": "Punto3",
-            "request": "launch",
-            "mainClass": "TP0.Punto3",
-            "projectName": "TRABAJOS_9d691805"
-        },
-        {
-            "type": "java",
-            "name": "Punto4",
-            "request": "launch",
-            "mainClass": "TP0.Punto4",
-            "projectName": "TRABAJOS_9d691805"
-        },
-        {
-            "type": "java",
-            "name": "Punto5",
-            "request": "launch",
-            "mainClass": "TP0.Punto5",
-            "projectName": "TRABAJOS_9d691805"
-        },
-        {
-            "type": "java",
-            "name": "Punto6",
-            "request": "launch",
-            "mainClass": "TP0.Punto6",
-            "projectName": "TRABAJOS_9d691805"
-        },
-        {
-            "type": "java",
-            "name": "Main",
-            "request": "launch",
-            "mainClass": "TP1.Punto1.Main",
-            "projectName": "TRABAJOS_9d691805"
-        },
-        {
-            "type": "java",
-            "name": "Main(1)",
-            "request": "launch",
-            "mainClass": "TP1.Punto2.Main",
-            "projectName": "TRABAJOS_9d691805"
-        },
-        {
-            "type": "java",
-            "name": "Main(2)",
-            "request": "launch",
-            "mainClass": "TP1.Punto3.Main",
-            "projectName": "TRABAJOS_9d691805"
-        },
-        {
-            "type": "java",
-            "name": "Main(3)",
-            "request": "launch",
-            "mainClass": "TP1.Punto4.Main",
-            "projectName": "TRABAJOS_9d691805"
-        },
-        {
-            "type": "java",
-            "name": "Main(4)",
-            "request": "launch",
-            "mainClass": "TP1.Punto5.Main",
-            "projectName": "TRABAJOS_9d691805"
-        },
-        {
-            "type": "java",
-            "name": "Main(5)",
-            "request": "launch",
-            "mainClass": "TP1.Punto6.Main",
-            "projectName": "TRABAJOS_9d691805"
-        },
-        {
-            "type": "java",
-            "name": "Main(6)",
-            "request": "launch",
-            "mainClass": "TP2.Punto1.Main",
-            "projectName": "TRABAJOS_9d691805"
-        }
-    ]
+  // Use IntelliSense para saber los atributos posibles.
+  // Mantenga el puntero para ver las descripciones de los existentes atributos.
+  // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "TP4.Punto1.Main",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "TP2.Punto4.Main",
+      "projectName": "TRABAJOS_9d691805"
+    },
+    {
+      "type": "java",
+      "name": "Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    },
+    {
+      "type": "java",
+      "name": "Clase1",
+      "request": "launch",
+      "mainClass": "Clase1",
+      "projectName": "TRABAJOS_9d691805"
+    },
+    {
+      "type": "java",
+      "name": "Clase2",
+      "request": "launch",
+      "mainClass": "Clase2",
+      "projectName": "TRABAJOS_9d691805"
+    },
+    {
+      "type": "java",
+      "name": "Punto1",
+      "request": "launch",
+      "mainClass": "TP0.Punto1",
+      "projectName": "TRABAJOS_9d691805"
+    },
+    {
+      "type": "java",
+      "name": "Punto2",
+      "request": "launch",
+      "mainClass": "TP0.Punto2",
+      "projectName": "TRABAJOS_9d691805"
+    },
+    {
+      "type": "java",
+      "name": "Punto3",
+      "request": "launch",
+      "mainClass": "TP0.Punto3",
+      "projectName": "TRABAJOS_9d691805"
+    },
+    {
+      "type": "java",
+      "name": "Punto4",
+      "request": "launch",
+      "mainClass": "TP0.Punto4",
+      "projectName": "TRABAJOS_9d691805"
+    },
+    {
+      "type": "java",
+      "name": "Punto5",
+      "request": "launch",
+      "mainClass": "TP0.Punto5",
+      "projectName": "TRABAJOS_9d691805"
+    },
+    {
+      "type": "java",
+      "name": "Punto6",
+      "request": "launch",
+      "mainClass": "TP0.Punto6",
+      "projectName": "TRABAJOS_9d691805"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "TP1.Punto1.Main",
+      "projectName": "TRABAJOS_9d691805"
+    },
+    {
+      "type": "java",
+      "name": "Main(1)",
+      "request": "launch",
+      "mainClass": "TP1.Punto2.Main",
+      "projectName": "TRABAJOS_9d691805"
+    },
+    {
+      "type": "java",
+      "name": "Main(2)",
+      "request": "launch",
+      "mainClass": "TP1.Punto3.Main",
+      "projectName": "TRABAJOS_9d691805"
+    },
+    {
+      "type": "java",
+      "name": "Main(3)",
+      "request": "launch",
+      "mainClass": "TP1.Punto4.Main",
+      "projectName": "TRABAJOS_9d691805"
+    },
+    {
+      "type": "java",
+      "name": "Main(4)",
+      "request": "launch",
+      "mainClass": "TP1.Punto5.Main",
+      "projectName": "TRABAJOS_9d691805"
+    },
+    {
+      "type": "java",
+      "name": "Main(5)",
+      "request": "launch",
+      "mainClass": "TP1.Punto6.Main",
+      "projectName": "TRABAJOS_9d691805"
+    },
+    {
+      "type": "java",
+      "name": "Main(6)",
+      "request": "launch",
+      "mainClass": "TP2.Punto1.Main",
+      "projectName": "TRABAJOS_9d691805"
+    }
+  ]
 }

@@ -2,7 +2,7 @@ package TP1.Punto5;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import com.milibreria.utilidades.validaciones;
+import TP1.validaciones;
 
 public class Main {
     public static void main(String[] args) {
