@@ -2,7 +2,7 @@ package TP4.Punto2;
 
 public class ColaCircular<T> {
     private final static Integer defaultDimension = 10;
-    private T[] queue;
+    private T[] data;
     private int head;
     private int tail;
 
@@ -12,15 +12,26 @@ public class ColaCircular<T> {
 
     @SuppressWarnings("unchecked")
     public ColaCircular(int dimension) {
-        this.queue = (T[]) new Object[dimension + 1]; // Inicializa el array
+        this.data = (T[]) new Object[dimension + 1]; // Inicializa el array
         this.head = 0;
         this.tail = 0;
     }
 
+    /*
+     * El array se inicializa con dimension + 1 en lugar de simplemente dimension
+     * para evitar que se confunda una cola llena con una cola vacía.
+     * En una cola circular, para distinguir entre una cola llena y una cola vacía,
+     * es útil dejar una celda del array sin usar. Esto se debe a que, en ambas
+     * situaciones (head == tail), la cola parece estar vacía.El propósito de
+     * agregar 1 al tamaño del array es asegurar que, incluso cuando todos los
+     * elementos válidos se estén utilizando, el índice tail nunca se superponga con
+     * head, evitando así la ambigüedad entre el estado lleno y vacío de la cola.
+     */
+
     // Método para obtener la posición siguiente de un elemento de la cola
     private int next(int pos) {
         pos++;
-        if (pos >= this.queue.length) {
+        if (pos >= this.data.length) {
             pos = 0;
         }
         return pos;
@@ -32,7 +43,7 @@ public class ColaCircular<T> {
             throw new IllegalStateException("Cola llena");
 
         }
-        this.queue[this.tail] = element; // Añade el elemento a donde apunta el tail
+        this.data[this.tail] = element; // Añade el elemento a donde apunta el tail
         this.tail = this.next(this.tail); // Ahora el tail apunta a la siguiente posición
     }
 
@@ -41,7 +52,7 @@ public class ColaCircular<T> {
         if (this.isFull()) {
             return false;
         }
-        this.queue[this.tail] = element;
+        this.data[this.tail] = element;
         this.tail = this.next(this.tail);
         return true;
     }
@@ -52,7 +63,7 @@ public class ColaCircular<T> {
         if (this.isEmpty()) {
             throw new IllegalStateException("Cola vacía");
         }
-        return this.queue[head];
+        return this.data[head];
     }
 
     // Método para devolver el primer elemento sin eliminarlo (no lanza excepción,
@@ -61,7 +72,7 @@ public class ColaCircular<T> {
         if (this.isEmpty()) {
             return null;
         }
-        return this.queue[this.head];
+        return this.data[this.head];
     }
 
     // Método para eliminar y devolver el primer elemento (lanza excepción si está
@@ -70,7 +81,7 @@ public class ColaCircular<T> {
         if (this.isEmpty()) {
             throw new IllegalStateException("Cola vacía");
         }
-        T element = this.queue[this.head];
+        T element = this.data[this.head];
         this.head = this.next(this.head);
         return element;
     }
@@ -81,7 +92,7 @@ public class ColaCircular<T> {
         if (this.isEmpty()) {
             return null;
         }
-        T element = this.queue[this.head];
+        T element = this.data[this.head];
         this.head = this.next(this.head);
         return element;
     }
@@ -91,7 +102,7 @@ public class ColaCircular<T> {
         if (this.tail >= this.head) {
             return this.tail - this.head;
         } else {
-            return this.queue.length - this.head + this.tail;
+            return this.data.length - this.head + this.tail;
         }
     }
 
@@ -104,6 +115,12 @@ public class ColaCircular<T> {
     public boolean isFull() {
         return this.next(this.tail) == this.head;
     }
+    /*
+     * Supongamos que llenas la cola con el máximo posible de elementos, hasta que
+     * tail esté justo antes de head (por ejemplo, si head = 1 y tail = 0 tras
+     * recorrer el array circular). Llamar a isFull() devolverá true porque
+     * next(tail) == head.
+     */
 
 }
 

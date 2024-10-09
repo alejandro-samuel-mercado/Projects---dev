@@ -3,8 +3,8 @@ package TP4;
 public class Queue<ELEMENT> {
     private final static Integer defaultDimension = 10;
     private ELEMENT[] data;
-    private int head;
-    private int tail;
+    private int frente;
+    private int fin;
     private int count;
 
     // Constructor sin parámetros (usa la dimensión por defecto)
@@ -16,8 +16,8 @@ public class Queue<ELEMENT> {
     @SuppressWarnings("unchecked")
     public Queue(int dimension) {
         this.data = (ELEMENT[]) new Object[dimension]; // Inicializa el array
-        this.head = 0;
-        this.tail = 0;
+        this.frente = 0;
+        this.fin = 0;
         this.count = 0;
     }
 
@@ -36,8 +36,8 @@ public class Queue<ELEMENT> {
             throw new IllegalStateException("Cola llena");
         }
 
-        this.data[this.tail] = element; // Añade el elemento a donde apunta el tail
-        this.tail = this.next(this.tail); // Ahora el tail apunta a la siguiente posición
+        this.data[this.fin] = element; // Añade el elemento a donde apunta el tail
+        this.fin = this.next(this.fin); // Ahora el tail apunta a la siguiente posición
         ++this.count;
 
     }
@@ -47,8 +47,8 @@ public class Queue<ELEMENT> {
         if (isFull()) {
             return false;
         }
-        this.data[this.tail] = element;
-        this.tail = this.next(this.tail);
+        this.data[this.fin] = element;
+        this.fin = this.next(this.fin);
         ++this.count;
 
         return true;
@@ -60,7 +60,7 @@ public class Queue<ELEMENT> {
         if (isEmpty()) {
             throw new IllegalStateException("Cola vacía");
         }
-        return this.data[this.head];
+        return this.data[this.frente];
     }
 
     // Método para devolver el primer elemento sin eliminarlo (no lanza excepción,
@@ -69,7 +69,7 @@ public class Queue<ELEMENT> {
         if (isEmpty()) {
             return null;
         }
-        return this.data[this.head];
+        return this.data[this.frente];
     }
 
     // Método para eliminar y devolver el primer elemento (lanza excepción si está
@@ -78,8 +78,8 @@ public class Queue<ELEMENT> {
         if (isEmpty()) {
             throw new IllegalStateException("Cola vacía");
         }
-        ELEMENT element = this.data[this.head];
-        this.head = this.next(this.head);
+        ELEMENT element = this.data[this.frente];
+        this.frente = this.next(this.frente);
         --this.count;
         return element;
     }
@@ -90,8 +90,8 @@ public class Queue<ELEMENT> {
         if (isEmpty()) {
             return null;
         }
-        ELEMENT element = this.data[this.head];
-        this.head = this.next(this.head);
+        ELEMENT element = this.data[this.frente];
+        this.frente = this.next(this.frente);
         --this.count;
         return element;
     }
@@ -118,7 +118,6 @@ public class Queue<ELEMENT> {
 /// una operación de inserción o eliminación
 
 // Es útil cuando se quiere aprovechar al máximo el espacio disponible en la
-// cola
-// y se está dispuesto a gestionar una variable adicional para contar los
+// cola y se está dispuesto a gestionar una variable adicional para contar los
 // elementos. Esto es especialmente útil cuando el uso del espacio es una
 // prioridad y se desea una capacidad total de N elementos.

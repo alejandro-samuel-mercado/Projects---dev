@@ -1,57 +1,85 @@
 from io import open
 import os
 
-texto = "Nombre: Agustina \nApellido: Cars"
+# CREAR O SOBREESCRIBIR UN ARCHIVO
+texto = "Nombre: Nunu \nApellido: Cars"
 try:
-    fichero = open('text.txt', 'w')
-    fichero.write(texto)
-    fichero.close()
+    with open('./text.txt', 'w') as fichero:
+        fichero.write(texto)
+        fichero.close()
 except Exception as e:
     print(f"Error: {e}")
 
-# Leer texto
+# LEER FICHERO
 try:
-    fichero = open('text.txt', 'r')
-    text = fichero.read()
-    fichero.close()
-    print(text)
-except Exception as e:
-    print(f"Error: {e}")
-
-
-# Leer creando una lista
-try:
-    fichero = open('text.txt', 'r')
-    text1 = fichero.readlines()
-    fichero.close()
-    print(text1)
-
+    with open('text.txt', 'r') as fichero:
+        text = fichero.read()
+        fichero.close()
+        print(text)
 except Exception as e:
     print(f"Error: {e}")
 
 
-# Leer con while
-with open('text.txt', 'r') as fichero:
-    for linea in fichero:
-        print(linea)
+# LEER Y ESCRIBIR
+try:
+    with open('text.txt', 'r+') as fichero:
+        text = fichero.read()
+        print(text)
+
+    # Puntero al inicio para sorbeescribir
+        fichero.seek(0)
+        fichero.write("Palabra al inicio")
+except Exception as e:
+    print(f"Error: {e}")
 
 
-# Añadir datos al final de un fichero
-fichero = open('text.txt', 'a')  # puntero al final
-fichero.write('\n DNI:44516402')
-fichero.close()
+# AGREGAR DATOS A UN ARCHIVO EXISTENTE (Al final)
+try:
+    with open('text.txt', 'a') as fichero:
+        fichero.write("Nueva linea\n")
+        fichero.close()
+except Exception as e:
+    print(f"Error: {e}")
 
-# Crear fichero si no existe
-fichero = open('text.txt', 'a+')
+
+# AGREGAR DATOS A UN ARCHIVO EXISTENTE O NO (Al final)
+try:
+    with open('text.txt', 'a+') as fichero:
+        fichero.write("Nueva linea\n")
+        fichero.close()
+except Exception as e:
+    print(f"Error: {e}")
 
 
-# Leer todas las líneas en una lista, modificar una línea en la lista, posicionar el
-# puntero al principio y reescribir de nuevo todas las líneas
-fichero = open('text.txt', 'r+')
-texto = fichero.readlines()
+# MODIFICAR CONTENIDO EN UN FICHERO
+try:
+    with open('text.txt', 'r+') as fichero:
+        lineas = fichero.readlines()
 
-texto[2] = "Linea 3"  # Modificar linea deseada
+        lineaAModificar = 3
+        if 0 <= lineaAModificar < len(lineas):
+            lineas[lineaAModificar] = "Modificacion\n"
 
-fichero.seek(0)  # Puntero al inicio
-fichero.writelines(texto)  # Reescribir
-fichero.close()
+        fichero.seek(0)
+        fichero.writelines(lineas)
+        fichero.truncate()
+
+except Exception as e:
+    print(f"Error: {e}")
+
+
+# ELIMINAR UNA LINEA
+try:
+    with open('text.txt', 'r') as fichero:
+        linea = fichero.readlines()
+
+        lineaABorrar = 3
+
+        if 0 <= lineaABorrar < len(linea):
+            del linea[lineaABorrar]
+
+        fichero.seek(0)
+        fichero.writelines(lineas)
+        fichero.truncate()
+except Exception as e:
+    print(f"Error: {e}")
