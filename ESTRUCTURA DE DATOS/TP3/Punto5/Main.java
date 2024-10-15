@@ -1,9 +1,8 @@
 package TP3.Punto5;
 
 import TP3.Punto1.Stack;
-import TP2.validaciones;
+import utils.validaciones;
 import javax.swing.*;
-import java.util.random.*;
 
 public class Main {
 

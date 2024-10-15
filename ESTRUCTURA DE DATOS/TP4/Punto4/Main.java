@@ -1,15 +1,15 @@
 package TP4.Punto4;
 
 import java.util.Scanner;
-import TP4.Punto2.ColaCircular;
-import TP4.validaciones;
+import utils.Queue.*;
+import utils.validaciones;
 
 public class Main {
     public static void main(String[] args) {
-        ColaCircular<Visitante> colaGeneral = new ColaCircular<>(30);
-        ColaCircular<Visitante> colaParaMontañaRusa = new ColaCircular<>(30);
-        ColaCircular<Visitante> colaParaCalesita = new ColaCircular<>(30);
-        ColaCircular<Visitante> colaAuxiliar = new ColaCircular<>(30);
+        SpeedQueue<Visitante> colaGeneral = new SpeedQueue<>(30);
+        SpeedQueue<Visitante> colaParaMontañaRusa = new SpeedQueue<>(30);
+        SpeedQueue<Visitante> colaParaCalesita = new SpeedQueue<>(30);
+        SpeedQueue<Visitante> colaAuxiliar = new SpeedQueue<>(30);
         Scanner input = new Scanner(System.in);
 
         agregarVisitantesColaGeneral(input, colaGeneral);
@@ -22,8 +22,7 @@ public class Main {
             System.out.println("4. Dejar pasar a un visitante");
             System.out.println("5  Dejar pasar a todos los visitantes");
             System.out.println("6. Salir");
-            System.out.print("Seleccione una opción:\n---------------------\n ");
-            int opcion = validaciones.validarNumero(input);
+            int opcion = validaciones.validarNumero(input, "Seleccione una opción:\n---------------------\n ");
             switch (opcion) {
 
                 case 1:
@@ -52,7 +51,7 @@ public class Main {
         } while (!salir);
     }
 
-    public static void agregarVisitantesColaGeneral(Scanner input, ColaCircular<Visitante> colaGeneral) {
+    public static void agregarVisitantesColaGeneral(Scanner input, SpeedQueue<Visitante> colaGeneral) {
 
         int cantidadVisitantesAIngresar = 5 + (int) (Math.random() * 26); // Genera un tamaño entre 5 y 30
 
@@ -65,7 +64,7 @@ public class Main {
         System.out.println("---------\nVisitantes añadidos\n----------");
     }
 
-    public static void mostrarFilaGeneral(ColaCircular<Visitante> colaGeneral, ColaCircular<Visitante> colaAux) {
+    public static void mostrarFilaGeneral(SpeedQueue<Visitante> colaGeneral, SpeedQueue<Visitante> colaAux) {
         if (!colaGeneral.isEmpty()) {
             while (!colaGeneral.isEmpty()) {
                 Visitante visitante = colaGeneral.poll();
@@ -82,8 +81,9 @@ public class Main {
         }
     }
 
-    public static void transferirAJuegoPorEdad(ColaCircular<Visitante> colaGeneral,
-            ColaCircular<Visitante> colaParaMontañaRusa, ColaCircular<Visitante> colaParaCalesita) {
+    public static void transferirAJuegoPorEdad(
+            SpeedQueue<Visitante> colaGeneral,
+            SpeedQueue<Visitante> colaParaMontañaRusa, SpeedQueue<Visitante> colaParaCalesita) {
         if (!colaGeneral.isEmpty()) {
             while (!colaGeneral.isEmpty()) {
                 for (int i = 0; i < 5 && !colaGeneral.isEmpty(); i++) {
@@ -102,10 +102,11 @@ public class Main {
         }
     }
 
-    public static void mostrarFilaParaCadaJuego(ColaCircular<Visitante> colaParaMontañaRusa,
-            ColaCircular<Visitante> colaParaCalesita) {
-        ColaCircular<Visitante> auxMontañaRusa = new ColaCircular<>(30);
-        ColaCircular<Visitante> auxCalesita = new ColaCircular<>(30);
+    public static void mostrarFilaParaCadaJuego(
+            SpeedQueue<Visitante> colaParaMontañaRusa,
+            SpeedQueue<Visitante> colaParaCalesita) {
+        SpeedQueue<Visitante> auxMontañaRusa = new SpeedQueue<>(30);
+        SpeedQueue<Visitante> auxCalesita = new SpeedQueue<>(30);
 
         if (!colaParaCalesita.isEmpty() && !colaParaMontañaRusa.isEmpty()) {
 
@@ -140,12 +141,13 @@ public class Main {
         }
     }
 
-    public static void dejarPasarUnVisitante(Scanner input, ColaCircular<Visitante> colaParaMontañaRusa,
-            ColaCircular<Visitante> colaParaCalesita) {
+    public static void dejarPasarUnVisitante(Scanner input,
+            SpeedQueue<Visitante> colaParaMontañaRusa,
+            SpeedQueue<Visitante> colaParaCalesita) {
 
         if (!colaParaCalesita.isEmpty() && !colaParaMontañaRusa.isEmpty()) {
-            System.out.println("----------\n¿ Montaña rusa(m) o Calesita(c)?");
-            String opcion = validaciones.validarTextoIngresado(input).toLowerCase();
+            String opcion = validaciones.validarTextoIngresado(input, "----------\n¿ Montaña rusa(m) o Calesita(c)?")
+                    .toLowerCase();
 
             if (opcion.equals("m")) {
                 Visitante visitante = colaParaMontañaRusa.poll();
@@ -162,11 +164,12 @@ public class Main {
         }
     }
 
-    public static void dejarPasarATodos(ColaCircular<Visitante> colaParaMontañaRusa,
-            ColaCircular<Visitante> colaParaCalesita) {
+    public static void dejarPasarATodos(
+            SpeedQueue<Visitante> colaParaMontañaRusa,
+            SpeedQueue<Visitante> colaParaCalesita) {
         int cantidadMontañaRusa = 0;
         int cantidadCalesita = 0;
-        ColaCircular<Visitante> colaAux = new ColaCircular<>(30);
+        SpeedQueue<Visitante> colaAux = new SpeedQueue<>(30);
 
         if (!colaParaMontañaRusa.isEmpty()) {
             System.out.println("----------Montaña rusa-----------");
@@ -196,7 +199,7 @@ public class Main {
     }
 
     public static void mostrarCantidades(int cantidadCalesita, int cantidadMontañaRusa,
-            ColaCircular<Visitante> colaAux) {
+            SpeedQueue<Visitante> colaAux) {
         int cantidadMenoresEdad = 0;
         while (!colaAux.isEmpty()) {
             Visitante visitante = colaAux.poll();

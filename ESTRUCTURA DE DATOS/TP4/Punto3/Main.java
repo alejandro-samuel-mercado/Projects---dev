@@ -1,8 +1,7 @@
 package TP4.Punto3;
 
 import TP4.Punto2.ColaCircular;
-import TP4.validaciones;
-
+import utils.validaciones;
 import java.util.Scanner;
 
 public class Main {
@@ -20,8 +19,8 @@ public class Main {
             System.out.println("4. Mostrar trabajos de impresión");
             System.out.println("5. Mostrar trabajos impresos con más de X páginas");
             System.out.println("6. Salir");
-            System.out.print("Seleccione una opción:\n--------------------- ");
-            int opcion = validaciones.validarNumero(input);
+
+            int opcion = validaciones.validarNumero(input, "Seleccione una opción:\n--------------------- ");
             switch (opcion) {
                 case 1:
                     agregarTrabajo(input, trabajoImpresion);
@@ -50,10 +49,8 @@ public class Main {
     }
 
     public static void agregarTrabajo(Scanner input, ColaCircular<Impresion> trabajoImpresion) {
-        System.out.println("Nombre del trabajo: ");
-        String nombre = validaciones.validarTextoIngresado(input);
-        System.out.println("Cantidad de páginas:");
-        int cantPaginas = validaciones.validarNumero(input);
+        String nombre = validaciones.validarTextoIngresado(input, "Nombre del trabajo: ");
+        int cantPaginas = validaciones.validarNumero(input, "Cantidad de páginas: ");
 
         Impresion trabajo = new Impresion(nombre, cantPaginas);
         boolean agregar = trabajoImpresion.offer(trabajo);
@@ -114,8 +111,7 @@ public class Main {
     public static void trabajosSegunCantidadPaginas(Scanner input, ColaCircular<Impresion> trabajoImpresion,
             ColaCircular<Impresion> colaAux) {
         if (!trabajoImpresion.isEmpty()) {
-            System.out.println("Ingrese la cantidad de páginas mínima");
-            int cantPaginasMin = validaciones.validarNumero(input);
+            int cantPaginasMin = validaciones.validarNumero(input, "Ingrese la cantidad de páginas mínima: ");
             int cant = 0;
 
             while (!trabajoImpresion.isEmpty()) {

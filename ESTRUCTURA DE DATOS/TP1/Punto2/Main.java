@@ -1,7 +1,7 @@
 package TP1.Punto2;
 
 import java.util.Scanner;
-import TP1.validaciones;
+import utils.validaciones;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,16 +22,13 @@ public class Main {
      * @throws
      */
     public static void cargarDatos(Scanner scanner, ArticuloDeLibreria articulo) {
-        System.out.println("Ingrese un código");
-        int codigo = validaciones.validarNumero(scanner);
-        System.out.println("Ingrese un nombre");
-        String nombre = validaciones.validarTextoIngresado(scanner);
+        int codigo = validaciones.validarNumero(scanner, "Ingrese un código: ");
+        String nombre = validaciones.validarTextoIngresado(scanner, "Ingrese un nombre: ");
         System.out.println("Ingrese un precio");
         float precio = scanner.nextFloat();
         scanner.nextLine();
 
-        System.out.println("Ingrese una cantidad");
-        int cantidad = validaciones.validarNumero(scanner);
+        int cantidad = validaciones.validarNumero(scanner, "Ingrese una cantidad: ");
 
         articulo.setCodigo(codigo);
         articulo.setNombre(nombre);

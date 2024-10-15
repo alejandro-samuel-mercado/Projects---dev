@@ -1,4 +1,4 @@
-package CLASES.Stack;
+package utils.Stack;
 
 import java.util.Iterator;
 
@@ -9,7 +9,7 @@ public class Stack<T> implements Iterable<T> {
 
     @SuppressWarnings("unchecked")
     public Stack(int size) {
-        data = (T[]) new Object[size];
+        this.data = (T[]) new Object[size];
     }
 
     @SuppressWarnings("unchecked")
@@ -18,17 +18,18 @@ public class Stack<T> implements Iterable<T> {
         this.count = 0;
     }
 
-    public T push(T element) {
-        if (this.size() >= this.data.length) {
+    /** Método para añadir un elemento al final **/
+    public void push(T element) {
+        if (size() >= this.data.length) {
             throw new RuntimeException("La pila está llena");
         }
         this.data[this.count] = element;
         ++this.count;
-        return element;
     }
 
+    /** Método para eliminar el elemento del final **/
     public T pop() {
-        if (this.isEmpty()) {
+        if (isEmpty()) {
             throw new RuntimeException("La Pila está vacía");
         }
         T element = this.data[this.count - 1];
@@ -36,6 +37,7 @@ public class Stack<T> implements Iterable<T> {
         return element;
     }
 
+    /** Método para devolver el elemento del final **/
     public T peek() {
         if (this.isEmpty()) {
             throw new RuntimeException("La pila está llena");
@@ -44,13 +46,30 @@ public class Stack<T> implements Iterable<T> {
         return element;
     }
 
+    /** Método para buscar un elemento **/
+
+    public Integer search(T element) {
+        for (int pos = size() - 1; pos >= 0; --pos) {
+            if (this.data[pos].equals(element)) {
+                return data.length - pos;
+            }
+        }
+        return -1;
+    }
+
+    /** Método para verificar si la cola está vacía **/
     public boolean isEmpty() {
         return this.count <= 0;
     }
 
-    // Método para obtener el tamaño actual de la pila
+    /** Método para obtener el tamaño actual **/
     public int size() {
         return this.count;
+    }
+
+    /** Método para verificar si la pila está llena **/
+    public boolean isFull() {
+        return this.size() >= this.data.length;
     }
 
     // Implementación de Iterable para permitir el uso de for-each

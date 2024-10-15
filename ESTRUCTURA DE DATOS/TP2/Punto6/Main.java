@@ -1,6 +1,6 @@
 package TP2.Punto6;
 
-import TP2.validaciones;
+import utils.validaciones;
 
 /**
  * Main

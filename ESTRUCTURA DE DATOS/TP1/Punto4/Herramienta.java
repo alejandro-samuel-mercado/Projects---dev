@@ -1,7 +1,7 @@
 package TP1.Punto4;
 
 import java.util.Scanner;
-import TP1.validaciones;
+import utils.validaciones;
 
 public class Herramienta {
 
@@ -38,8 +38,7 @@ public class Herramienta {
     public void entregarCantidad(Scanner input) {
         int cantidadSolicitada;
         do {
-            System.out.println("Ingrese la cantidad solicitada");
-            cantidadSolicitada = validaciones.validarNumero(input);
+            cantidadSolicitada = validaciones.validarNumero(input, "Ingrese la cantidad solicitada: ");
             input.nextLine();
             if (cantidadSolicitada <= this.cantidad) {
                 this.cantidad -= cantidadSolicitada;

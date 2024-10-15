@@ -16,7 +16,7 @@ public class Matriz {
     public void llenarMatriz() {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                matriz[i][j] = matriz[i][j] = (int) (Math.random() * 10);
+                matriz[i][j] = (int) (Math.random() * 10);
             }
         }
     }

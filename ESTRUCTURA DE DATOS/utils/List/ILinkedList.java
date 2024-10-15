@@ -1,4 +1,4 @@
-package CLASES.List;
+package utils.List;
 
 public interface ILinkedList<E> extends Iterable<E> {
     public int size();

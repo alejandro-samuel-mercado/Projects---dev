@@ -1,6 +1,6 @@
 package TP3.Punto2;
 
-import TP2.validaciones;
+import utils.validaciones;
 import TP3.Stack;
 import javax.swing.*;
 

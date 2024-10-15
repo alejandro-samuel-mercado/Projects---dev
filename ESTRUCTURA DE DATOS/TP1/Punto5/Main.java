@@ -2,7 +2,7 @@ package TP1.Punto5;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import TP1.validaciones;
+import utils.validaciones;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,7 +19,7 @@ public class Main {
             System.out.println("Ingrese una opción: ");
             System.out.println("1: Agregar series");
             System.out.println("2:Mostrar todas las series");
-            System.out.println("3: Buscar una sere ");
+            System.out.println("3: Buscar una serie ");
             System.out.println("4: Mostrar las series dispoibles");
             System.out.println("5: Salir");
             op = input.nextLine();
@@ -64,27 +64,17 @@ public class Main {
         String continuar = "";
 
         do {
-
-            System.out.print("Ingrese el título de la serie: ");
-            String titulo = validaciones.validarTextoIngresado(input);
-
-            System.out.print("Ingrese el director de la serie: ");
-            String director = validaciones.validarTextoIngresado(input);
-
-            System.out.print("Ingrese el año de la serie: ");
-            int año = validaciones.validarNumero(input);
-
-            System.out.print("Ingrese la duración de la serie (en minutos): ");
-            int duracion = validaciones.validarNumero(input);
+            String titulo = validaciones.validarTextoIngresado(input, "Ingrese el título de la serie: ");
+            String director = validaciones.validarTextoIngresado(input, "Ingrese el director de la serie: ");
+            int año = validaciones.validarNumero(input, "Ingrese el año de la serie: ");
+            int duracion = validaciones.validarNumero(input, "Ingrese la duración de la serie (en minutos): ");
 
             System.out.print("¿Está disponible la serie? (true/false): ");
             boolean disponible = input.nextBoolean();
             input.nextLine(); // Limpiar el buffer del scanner
 
-            System.out.print("Ingrese el número de temporadas: ");
-            int temporadas = validaciones.validarNumero(input);
-            System.out.print("Ingrese el género de la serie: ");
-            String genero = validaciones.validarTextoIngresado(input);
+            int temporadas = validaciones.validarNumero(input, "Ingrese el número de temporadas: ");
+            String genero = validaciones.validarTextoIngresado(input, "Ingrese el género de la serie: ");
 
             SerieTV serie = new SerieTV(titulo, director, año, duracion, disponible, temporadas, genero);
             series.add(serie);
@@ -97,8 +87,7 @@ public class Main {
 
     public static void buscarSerie(ArrayList<SerieTV> series, Scanner input) {
         boolean encontrada = false;
-        System.out.println("Serie a buscar: ");
-        String serieABuscar = validaciones.validarTextoIngresado(input);
+        String serieABuscar = validaciones.validarTextoIngresado(input, "Serie a buscar: ");
         for (SerieTV serie : series) {
             if (serie.getTitulo().equals(serieABuscar)) {
                 serie.mostrarDatos();

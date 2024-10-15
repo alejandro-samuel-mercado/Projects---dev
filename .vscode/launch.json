@@ -6,6 +6,104 @@
   "configurations": [
     {
       "type": "java",
+      "name": "seven",
+      "request": "launch",
+      "mainClass": "EjerciciosParcial.seven",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "six",
+      "request": "launch",
+      "mainClass": "EjerciciosParcial.six",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "five",
+      "request": "launch",
+      "mainClass": "EjerciciosParcial.five",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "four",
+      "request": "launch",
+      "mainClass": "EjerciciosParcial.four",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "two",
+      "request": "launch",
+      "mainClass": "EjerciciosParcial.two",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "lalo",
+      "request": "launch",
+      "mainClass": "lalo",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "TP5.Punto7.Main",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "TP5.Punto6.Main",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "TP5.Punto5.Main",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "TP5.Punto4.Main",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "TP5.Punto3.Main",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "TP5.Punto2.Main",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "TP5.Punto1.Main",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
       "name": "Prueba",
       "request": "launch",
       "mainClass": "CLASES.Prueba",

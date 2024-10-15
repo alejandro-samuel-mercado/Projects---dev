@@ -10,7 +10,6 @@ public class Impresion {
 
     public Impresion(String nomTrabajo, int cantPagTrabajo) {
         codTrabajo = (int) (Math.random() * 100);
-
         this.nomTrabajo = nomTrabajo;
         this.cantPagTrabajo = cantPagTrabajo;
     }

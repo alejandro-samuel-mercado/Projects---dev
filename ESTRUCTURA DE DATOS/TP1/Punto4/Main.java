@@ -2,7 +2,7 @@ package TP1.Punto4;
 
 import java.util.Scanner;
 
-import TP1.validaciones;
+import utils.validaciones;
 
 /**
  * main
@@ -16,16 +16,11 @@ public class Main {
             for (int i = 0; i < herramientas.length; i++) {
                 System.out.println("Ingrese los datos de la herramienta " + (i + 1) + ":");
 
-                System.out.print("Código: ");
-                int codigo = validaciones.validarNumero(scanner);
-                System.out.print("Nombre: ");
-                String nombre = validaciones.validarTextoIngresado(scanner);
-                System.out.print("Tipo: ");
-                String tipo = validaciones.validarTextoIngresado(scanner);
-                System.out.print("Precio: ");
-                double precio = validaciones.validarNumero(scanner);
-                System.out.print("Cantidad: ");
-                int cantidad = validaciones.validarNumero(scanner);
+                int codigo = validaciones.validarNumero(scanner, "Código: ");
+                String nombre = validaciones.validarTextoIngresado(scanner, "Nombre: ");
+                String tipo = validaciones.validarTextoIngresado(scanner, "Tipo: ");
+                double precio = validaciones.validarNumero(scanner, "Precio: ");
+                int cantidad = validaciones.validarNumero(scanner, "Cantidad: ");
 
                 herramientas[i] = new Herramienta(codigo, nombre, cantidad, precio, tipo);
             }

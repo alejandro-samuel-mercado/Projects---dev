@@ -1,11 +1,12 @@
-package CLASES.List;
+package utils.List;
 
+import java.util.Comparator;
 import java.util.Iterator;
 
 /**
  * SingleLinkedList
  */
-public class SingleLinkedList<E extends Comparable<E>> implements ILinkedList<E> {
+public class SingleLinkedList<E> implements ILinkedList<E> {
 
     private Node<E> head; // Inicio
     private Node<E> tail; // Fin
@@ -181,6 +182,27 @@ public class SingleLinkedList<E extends Comparable<E>> implements ILinkedList<E>
         this.size = 0;
     }
 
+    /** Eliminar elementos duplicados **/
+    public void removeDuplicate() {
+        Node<E> current = head;
+
+        // Recorrer la lista con el primer puntero
+        while (current != null) {
+            Node<E> innerCurrent = current;
+            // Recorrer la lista con el segundo puntero para encontrar duplicados
+            while (innerCurrent.next != null) {
+                if (current.item.equals(innerCurrent.next.item)) {
+                    // Eliminar el nodo duplicado saltándolo
+                    innerCurrent.next = innerCurrent.next.next;
+                    size--;
+                } else {
+                    innerCurrent = innerCurrent.next;
+                }
+            }
+            current = current.next;
+        }
+    }
+
     /** Verificar si contiene un elemento específico **/
     public boolean contains(E element) {
         Node<E> current = this.head;
@@ -197,25 +219,26 @@ public class SingleLinkedList<E extends Comparable<E>> implements ILinkedList<E>
      * Sirve para insertar un elemento en la lista manteniendo el
      * orden ascendente o descendente de los elementos.
      **/
-    public void AddInOrder(E item) {
+
+    public void AddInOrder(E item, Comparator<? super E> compareTo) {
         // Si la lista está vacía, agrega el nuevo nodo como head y tail
         if (this.size == 0) {
             this.head = this.tail = new Node<>(item, null);
         } else {
             // Si el elemento es menor o igual al elemento en la cabeza, agregar al
             // principio
-            if (item.compareTo(this.head.item) <= 0) {
+            if (compareTo.compare(item, this.head.item) <= 0) {
                 this.addFirst(item);
             }
             // Si el elemento es mayor que el último elemento, agregar al final
-            else if (item.compareTo(this.tail.item) > 0) {
+            else if (compareTo.compare(item, this.tail.item) > 0) {
                 this.addLast(item);
             }
             // Si el elemento debe estar en algún punto intermedio
             else {
                 Node<E> current = this.head;
                 // Recorrer la lista para encontrar la posición correcta
-                while (current != null && item.compareTo(current.item) > 0) {
+                while (current != null && compareTo.compare(item, current.item) > 0) {
                     current = current.next;
                 }
                 // Insertar el nuevo nodo antes del nodo encontrado
@@ -263,9 +286,18 @@ public class SingleLinkedList<E extends Comparable<E>> implements ILinkedList<E>
         System.out.println(toString());
     }
 
+    /** Obtener el primer elemento **/
+    public E getFirst() {
+        return this.head.item;
+    }
+
+    public E getLast() {
+        return this.tail.item;
+    }
+
     /** Implementación del iterador */
     @Override
     public Iterator<E> iterator() {
-        return new MyIterator<>(head);
+        return new SimpleLinkedListIterator<>(head);
     }
 }

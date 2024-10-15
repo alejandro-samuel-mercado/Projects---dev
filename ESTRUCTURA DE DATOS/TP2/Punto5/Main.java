@@ -1,7 +1,7 @@
 package TP2.Punto5;
 
 import javax.swing.JOptionPane;
-import TP2.validaciones;
+import utils.validaciones;
 
 public class Main {
     public static void main(String[] args) {

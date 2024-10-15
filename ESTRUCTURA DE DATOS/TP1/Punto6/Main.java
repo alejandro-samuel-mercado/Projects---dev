@@ -2,7 +2,7 @@ package TP1.Punto6;
 
 import java.util.Scanner;
 
-import TP1.validaciones;
+import utils.validaciones;
 
 import java.util.ArrayList;
 
@@ -107,29 +107,21 @@ public class Main {
             ArrayList<ErjecicioGrupal> grupales) {
         String continuar = "";
         do {
-            System.out.print("Ingrese el nombre del entrenamiento ");
-            String nombreCentroEntrenamiento = validaciones.validarTextoIngresado(input);
-            System.out.print("Ingrese el nombre de la actividad: ");
-            String nombreActividadFisica = validaciones.validarTextoIngresado(input);
-
-            System.out.print("Ingrese el nombre del instructor: ");
-            String instructor = validaciones.validarTextoIngresado(input);
+            String nombreCentroEntrenamiento = validaciones.validarTextoIngresado(input,
+                    "Ingrese el nombre del entrenamiento ");
+            String nombreActividadFisica = validaciones.validarTextoIngresado(input,
+                    "Ingrese el nombre de la actividad: ");
+            String instructor = validaciones.validarTextoIngresado(input, "Ingrese el nombre del instructor: ");
 
             System.out.print("Disponibilidad: ");
             boolean disponible = input.nextBoolean();
             input.nextLine(); // Limpiar el buffer del scanner
-            System.out.print("Ingrese el día de la semana ");
-            String diaSemana = validaciones.validarTextoIngresado(input);
+            String diaSemana = validaciones.validarTextoIngresado(input, "Ingrese el día de la semana ");
+            int horaInicio = validaciones.validarNumero(input, "Hora de inicio: ");
 
-            System.out.print("Hora de inicio: ");
-            int horaInicio = validaciones.validarNumero(input);
-
-            System.out.print("Ingrese el nivel de dificultad: ");
-            String nivelDificultad = validaciones.validarTextoIngresado(input);
-            System.out.print("Ingrese la cantidad de participantes:  ");
-            int cantidadParticipantes = validaciones.validarNumero(input);
-            System.out.print("Ingrese el día de finalización:  ");
-            int diaFinalizacion = validaciones.validarNumero(input);
+            String nivelDificultad = validaciones.validarTextoIngresado(input, "Ingrese el nivel de dificultad: ");
+            int cantidadParticipantes = validaciones.validarNumero(input, "Ingrese la cantidad de participantes:  ");
+            int diaFinalizacion = validaciones.validarNumero(input, "Ingrese el día de finalización:  ");
 
             ErjecicioGrupal grupal = new ErjecicioGrupal(nombreCentroEntrenamiento, nombreActividadFisica, instructor,
                     disponible, diaSemana,
@@ -148,33 +140,27 @@ public class Main {
         String continuar = "";
 
         do {
-            System.out.print("Ingrese el nombre del entrenamiento ");
-            String nombreCentroEntrenamiento = validaciones.validarTextoIngresado(input);
-            System.out.print("Ingrese el nombre de la actividad: ");
-            String nombreActividadFisica = validaciones.validarTextoIngresado(input);
+            String nombreCentroEntrenamiento = validaciones.validarTextoIngresado(input,
+                    "Ingrese el nombre del entrenamiento ");
+            String nombreActividadFisica = validaciones.validarTextoIngresado(input,
+                    "Ingrese el nombre de la actividad: ");
 
-            System.out.print("Ingrese el nombre del instructor: ");
-            String instructor = validaciones.validarTextoIngresado(input);
+            String instructor = validaciones.validarTextoIngresado(input, "Ingrese el nombre del instructor: ");
 
             System.out.print("Disponibilidad: ");
             boolean disponible = input.nextBoolean();
             input.nextLine(); // Limpiar el buffer del scanner
-            System.out.print("Ingrese el día de la semana ");
-            String diaSemana = validaciones.validarTextoIngresado(input);
-
-            System.out.print("Hora de inicio: ");
-            int horaInicio = validaciones.validarNumero(input);
+            String diaSemana = validaciones.validarTextoIngresado(input, "Ingrese el día de la semana: ");
+            int horaInicio = validaciones.validarNumero(input, "Hora de inicio: ");
             /*
              * private int duracionHoras;
              * private String objetivosEntrenamiento;
              * private String rutinaPersonalizada;
              */
-            System.out.print("Ingrese la duración de horas ");
-            int duracionHoras = validaciones.validarNumero(input);
-            System.out.print("Ingrese los objetivos del entrenamiento:  ");
-            String objetivosEntrenamiento = validaciones.validarTextoIngresado(input);
-            System.out.print("Ingrese la rutina personaliada:  ");
-            String rutinaPersonalizada = validaciones.validarTextoIngresado(input);
+            int duracionHoras = validaciones.validarNumero(input, "Ingrese la duración de horas: ");
+            String objetivosEntrenamiento = validaciones.validarTextoIngresado(input,
+                    "Ingrese los objetivos del entrenamiento:  ");
+            String rutinaPersonalizada = validaciones.validarTextoIngresado(input, "Ingrese la rutina personaliada:  ");
 
             EntrenamientoPersonalizado personalizado = new EntrenamientoPersonalizado(nombreCentroEntrenamiento,
                     nombreActividadFisica, instructor, disponible, diaSemana, horaInicio, duracionHoras,

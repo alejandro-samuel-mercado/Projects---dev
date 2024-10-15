@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import TP1.validaciones;
+import utils.validaciones;
 
 public class Main {
     static String nombre;
@@ -28,10 +28,8 @@ public class Main {
     }
 
     public static void ingresarDatos(Scanner input) {
-        System.out.println("Ingrese nombre del evento");
-        nombre = validaciones.validarTextoIngresado(input);
-        System.out.println("Ingrese una descripción");
-        descripcion = validaciones.validarTextoIngresado(input);
+        nombre = validaciones.validarTextoIngresado(input, "Ingrese nombre del evento: ");
+        descripcion = validaciones.validarTextoIngresado(input, "Ingrese una descripción: ");
         String mensaje1 = "Ingrese una fecha de inicio con el formato \"yyyy-MM-dd\"";
         String mensaje2 = "Ingrese una fecha final con el formato \"yyyy-MM-dd\"";
         fechaInicio = leerFechaCorrecta(input, mensaje1);

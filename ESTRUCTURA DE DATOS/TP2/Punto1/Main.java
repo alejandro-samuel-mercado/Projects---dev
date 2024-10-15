@@ -1,8 +1,7 @@
 package TP2.Punto1;
 
 import javax.swing.*;
-import TP2.validaciones;
-
+import utils.validaciones;
 import java.time.LocalDate;
 
 public class Main {

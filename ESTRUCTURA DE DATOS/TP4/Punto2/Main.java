@@ -2,20 +2,18 @@ package TP4.Punto2;
 
 import java.util.Scanner;
 
-import TP1.validaciones;
+import utils.validaciones;
 
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Tamaño de la cola");
-        int tamaño = validaciones.validarNumero(input);
+        int tamaño = validaciones.validarNumero(input, "Tamaño de la cola: ");
         ColaCircular<Integer> colaCircular = new ColaCircular<>(tamaño);
         ColaCircular<Integer> colaAuxiliar = new ColaCircular<>(tamaño);
         boolean salir = false;
         do {
-            System.out.println(
+            int opcion = validaciones.validarNumero(input,
                     "Eliga una opción: \n 1)Agregar enteros\n 2)Eliminar todo \n 3)Eliminar primer elemento de la cola\n 4)Mostrar Cola\n 5)Salir\n-----------------");
-            int opcion = validaciones.validarNumero(input);
             switch (opcion) {
                 case 1:
                     agregarEnteros(input, colaCircular);
@@ -44,8 +42,7 @@ public class Main {
 
     public static void agregarEnteros(Scanner input, ColaCircular<Integer> colaCircular) {
 
-        System.out.println("Ingrese un número: ");
-        int num = validaciones.validarNumero(input);
+        int num = validaciones.validarNumero(input, "Ingrese un número: ");
         boolean agregar = colaCircular.offer(num);
         if (!agregar) {
             System.out.println("-----------\nCola llena\n-------------");

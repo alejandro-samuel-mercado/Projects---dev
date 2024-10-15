@@ -1,11 +1,11 @@
-package CLASES.List;
+package utils.List;
 
 import java.util.Iterator;
 
 /**
  * DoubleLinkedList
  */
-public class DoublyLinkedList<E extends Comparable<E>> implements ILinkedList<E> {
+public class DoublyLinkedList<E> implements ILinkedList<E> {
 
     private Node<E> head; // Inicio
     private Node<E> tail; // Fin
@@ -193,6 +193,43 @@ public class DoublyLinkedList<E extends Comparable<E>> implements ILinkedList<E>
         this.size = 0;
     }
 
+    /** Eliminar duplicados **/
+    public void removeDuplicate() {
+        Node<E> current = head;
+
+        while (current != null) { // Recorrer la lista con el primer puntero
+            Node<E> innerCurrent = current.next;
+
+            // Recorrer la lista con el segundo puntero para encontrar duplicados
+            while (innerCurrent != null) {
+                if (current.item.equals(innerCurrent.item)) {
+                    Node<E> duplicate = innerCurrent; // Eliminar el nodo duplicado
+
+                    // Actualizar referencias del nodo anterior y siguiente
+                    if (duplicate.prev != null) {
+                        duplicate.prev.next = duplicate.next;
+                    }
+                    if (duplicate.next != null) {
+                        duplicate.next.prev = duplicate.prev;
+                    }
+
+                    if (duplicate == tail) {
+                        tail = duplicate.prev; // Si el nodo duplicado es tail, actualizamos tail
+                    }
+
+                    // Avanzamos el puntero "innerCurrent" después de eliminar
+                    innerCurrent = duplicate.next;
+
+                    size--;
+                } else {
+                    innerCurrent = innerCurrent.next;
+                }
+            }
+
+            current = current.next;
+        }
+    }
+
     /** Verificar si contiene un elemento específico **/
     public boolean contains(E element) {
         Node<E> current = this.head;
@@ -208,42 +245,44 @@ public class DoublyLinkedList<E extends Comparable<E>> implements ILinkedList<E>
     /**
      * Sirve para insertar un elemento en la lista manteniendo el
      * orden ascendente o descendente de los elementos.
+     * 
+     * 
+     * public void AddInOrder(E item) {
+     * // Si la lista está vacía, agrega el nuevo nodo como head y tail
+     * if (this.size == 0) {
+     * this.head = this.tail = new Node<>(item, null, null);
+     * } else {
+     * // Si el elemento es menor o igual al elemento en la cabeza, agregar al
+     * // principio
+     * if (item.compareTo(this.head.item) <= 0) {
+     * this.addFirst(item);
+     * }
+     * // Si el elemento es mayor que el último elemento, agregar al final
+     * else if (item.compareTo(this.tail.item) > 0) {
+     * this.addLast(item);
+     * }
+     * // Si el elemento debe estar en algún punto intermedio
+     * else {
+     * Node<E> current = this.head;
+     * // Recorrer la lista para encontrar la posición correcta
+     * while (current != null && item.compareTo(current.item) > 0) {
+     * current = current.next;
+     * }
+     * // Insertar el nuevo nodo antes del nodo encontrado
+     * Node<E> newNode = new Node<>(item, current, current.prev);
+     * if (current.prev != null) {
+     * current.prev.next = newNode; // Conectar el nodo anterior con el nuevo nodo
+     * }
+     * current.prev = newNode; // Conectar el nuevo nodo con el nodo actual
+     * if (current == this.head) {
+     * this.head = newNode; // Actualizar head si es necesario
+     * }
+     * }
+     * }
+     * 
+     * this.size++;
+     * }
      **/
-    public void AddInOrder(E item) {
-        // Si la lista está vacía, agrega el nuevo nodo como head y tail
-        if (this.size == 0) {
-            this.head = this.tail = new Node<>(item, null, null);
-        } else {
-            // Si el elemento es menor o igual al elemento en la cabeza, agregar al
-            // principio
-            if (item.compareTo(this.head.item) <= 0) {
-                this.addFirst(item);
-            }
-            // Si el elemento es mayor que el último elemento, agregar al final
-            else if (item.compareTo(this.tail.item) > 0) {
-                this.addLast(item);
-            }
-            // Si el elemento debe estar en algún punto intermedio
-            else {
-                Node<E> current = this.head;
-                // Recorrer la lista para encontrar la posición correcta
-                while (current != null && item.compareTo(current.item) > 0) {
-                    current = current.next;
-                }
-                // Insertar el nuevo nodo antes del nodo encontrado
-                Node<E> newNode = new Node<>(item, current, current.prev);
-                if (current.prev != null) {
-                    current.prev.next = newNode; // Conectar el nodo anterior con el nuevo nodo
-                }
-                current.prev = newNode; // Conectar el nuevo nodo con el nodo actual
-                if (current == this.head) {
-                    this.head = newNode; // Actualizar head si es necesario
-                }
-            }
-        }
-
-        this.size++;
-    }
 
     /** Verificar si la lista está vacía */
     public boolean isEmpty() {
@@ -260,7 +299,7 @@ public class DoublyLinkedList<E extends Comparable<E>> implements ILinkedList<E>
         StringBuilder sb = new StringBuilder();
         Node<E> recorrer = head;
         while (recorrer != null) {
-            sb.append(recorrer.getItem()).append(" <-> ");
+            sb.append(recorrer.getItem()).append(" <->\n");
             recorrer = recorrer.getNext();
         }
         return sb.length() > 0 ? sb.substring(0, sb.length() - 5) : "Lista vacía";
@@ -270,10 +309,30 @@ public class DoublyLinkedList<E extends Comparable<E>> implements ILinkedList<E>
         System.out.println(toString());
     }
 
+    // Método para recorrer la lista de cabeza a cola
+    public void travelNext() {
+        Node<E> current = head;
+        while (current != null) {
+            System.out.print(current.item + " <-> ");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+
+    // Método para recorrer la lista de cola a cabeza
+    public void travelBack() {
+        Node<E> current = tail;
+        while (current != null) {
+            System.out.print(current.item + " <-> ");
+            current = current.prev;
+        }
+        System.out.println("null");
+    }
+
     /** Implementación del iterador */
     @Override
     public Iterator<E> iterator() {
-        return new MyIterator<>(head);
+        return new SimpleLinkedListIterator<>(head);
     }
 
 }

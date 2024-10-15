@@ -1,20 +1,20 @@
 package TP4.Punto5;
 
 import java.util.Scanner;
+import utils.validaciones;
+import utils.Queue.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
         /* Tamaño de las queue */
-        System.out.print("Tamaño de la primera cola: ");
-        int tamaño1 = validaciones.validarNumero(input);
-        System.out.print("Tamaño de la segunda cola: ");
-        int tamaño2 = validaciones.validarNumero(input);
+        int tamaño1 = validaciones.validarNumero(input, "Tamaño de la primera cola: ");
+        int tamaño2 = validaciones.validarNumero(input, "Tamaño de la segunda cola: ");
 
-        ColaCircular<Integer> primeraCola = new ColaCircular<>(tamaño1);
-        ColaCircular<Integer> segundaCola = new ColaCircular<>(tamaño2);
-        ColaCircular<Integer> colaIntercalada = new ColaCircular<>(tamaño1 + tamaño2);
+        SpeedQueue<Integer> primeraCola = new SpeedQueue<>(tamaño1);
+        SpeedQueue<Integer> segundaCola = new SpeedQueue<>(tamaño2);
+        SpeedQueue<Integer> colaIntercalada = new SpeedQueue<>(tamaño1 + tamaño2);
 
         /* Métodos */
         agregarNumerosAColas(input, primeraCola, segundaCola, tamaño1, tamaño2);
@@ -24,15 +24,15 @@ public class Main {
 
     }
 
-    public static void agregarNumerosAColas(Scanner input, ColaCircular<Integer> primeraCola,
-            ColaCircular<Integer> segundaCola, int tamaño1, int tamaño2) {
+    public static void agregarNumerosAColas(Scanner input,
+            SpeedQueue<Integer> primeraCola,
+            SpeedQueue<Integer> segundaCola, int tamaño1, int tamaño2) {
 
         /* Agregar números a la primera cola */
         System.out.println("\n----------Primera cola--------------");
         System.out.println("Ingrese " + tamaño1 + " números\n");
         for (int i = 0; i < tamaño1; i++) {
-            System.out.print("Num" + (i + 1) + ": ");
-            int num = validaciones.validarNumero(input);
+            int num = validaciones.validarNumero(input, "Num" + (i + 1) + ": ");
             primeraCola.add(num);
         }
 
@@ -40,26 +40,26 @@ public class Main {
         System.out.println("\n----------Segunda cola--------------");
         System.out.println("Ingrese " + tamaño2 + " números\n");
         for (int i = 0; i < tamaño2; i++) {
-            System.out.print("Num" + (i + 1) + ": ");
-            int num = validaciones.validarNumero(input);
+            int num = validaciones.validarNumero(input, "Num" + (i + 1) + ": ");
             segundaCola.add(num);
         }
 
     }
 
-    public static void intercalarColas(ColaCircular<Integer> primeraCola, ColaCircular<Integer> segundaCola,
-            ColaCircular<Integer> colaIntercalada, int tamaño1, int tamaño2) {
+    public static void intercalarColas(
+            SpeedQueue<Integer> primeraCola,
+            SpeedQueue<Integer> segundaCola,
+            SpeedQueue<Integer> colaIntercalada, int tamaño1, int tamaño2) {
 
         /* Colas auxiliares para devolver elementos a colas originales */
-        ColaCircular<Integer> primeraColaAux = new ColaCircular<>(tamaño1);
-        ColaCircular<Integer> segundaColaAux = new ColaCircular<>(tamaño2);
+        SpeedQueue<Integer> primeraColaAux = new SpeedQueue<Integer>(tamaño1);
+        SpeedQueue<Integer> segundaColaAux = new SpeedQueue<Integer>(tamaño2);
 
         /*
          * Añade uno por uno, de manera intercalada, cada elemento de ambas colas a una
          * tercer cola
          */
         if (!primeraCola.isEmpty() || !segundaCola.isEmpty()) {
-
             while (!primeraCola.isEmpty() || !segundaCola.isEmpty()) {
 
                 /* Añade un elemento de la primera a la tercer cola */
@@ -92,13 +92,15 @@ public class Main {
         }
     }
 
-    public static void mostrarElementosDeColas(ColaCircular<Integer> primeraCola, ColaCircular<Integer> segundaCola,
-            ColaCircular<Integer> colaIntercalada, int tamaño1, int tamaño2) {
+    public static void mostrarElementosDeColas(
+            SpeedQueue<Integer> primeraCola,
+            SpeedQueue<Integer> segundaCola,
+            SpeedQueue<Integer> colaIntercalada, int tamaño1, int tamaño2) {
 
         /* Colas auxiliares para devolver elementos a colas originales */
         // ColaCircular<Integer> primeraColaAux = new ColaCircular<>(tamaño1);
         // ColaCircular<Integer> segundaColaAux = new ColaCircular<>(tamaño2);
-        ColaCircular<Integer> colaIntercaladaAux = new ColaCircular<>(tamaño1 + tamaño2);
+        SpeedQueue<Integer> colaIntercaladaAux = new SpeedQueue<Integer>(tamaño1 + tamaño2);
 
         if (!primeraCola.isEmpty() || !segundaCola.isEmpty() || !colaIntercalada.isEmpty()) {
             System.out.println("\n---------Primera cola----------\n");
@@ -143,7 +145,7 @@ public class Main {
         }
     }
 
-    public static void sumaTercerCola(ColaCircular<Integer> colaIntercalada) {
+    public static void sumaTercerCola(SpeedQueue<Integer> colaIntercalada) {
 
         int sumaTercerCola = 0;
         System.out.println("\n--------Sumatoria de números de la cola intercalada--------");

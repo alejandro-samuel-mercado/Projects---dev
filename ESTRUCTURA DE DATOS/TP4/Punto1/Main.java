@@ -2,8 +2,8 @@ package TP4.Punto1;
 
 import java.util.Scanner;
 
-import TP4.validaciones;
-import TP4.Queue;
+import utils.validaciones;
+import utils.Queue.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,22 +19,16 @@ public class Main {
 
     public static void agregarCliente(int numClientes, Queue<Cliente> colaClientes, Scanner scanner) {
 
-        System.out.println("Ingrese el número de clientes a atender:");
-        numClientes = validaciones.validarNumero(scanner);
+        numClientes = validaciones.validarNumero(scanner, "Ingrese el número de clientes a atender: ");
 
         for (int i = 0; i < numClientes; i++) {
-            System.out.println("Ingrese el código del cliente " + (i + 1) + ": ");
-            int codCliente = validaciones.validarNumero(scanner);
+            int codCliente = validaciones.validarNumero(scanner, "Ingrese el código del cliente " + (i + 1) + ": ");
 
-            System.out.println("Ingrese nombre/s del cliente:");
-            String nCliente = validaciones.validarTextoIngresado(scanner);
-            System.out.println("Ingrese el apellido del cliente:");
-            String aCliente = validaciones.validarTextoIngresado(scanner);
+            String nCliente = validaciones.validarTextoIngresado(scanner, "Ingrese nombre/s del cliente: ");
+            String aCliente = validaciones.validarTextoIngresado(scanner, "Ingrese el apellido del cliente: ");
             String[] aynCliente = { nCliente, aCliente };
-
-            System.out.println("Ingrese el email del cliente:");
-            String mailCliente = validaciones.validarMail(scanner);
-
+            String mailCliente = validaciones.validarMail(scanner, "Ingrese el email del cliente: ");
+            System.out.println();
             Cliente cliente = new Cliente(codCliente, aynCliente, mailCliente);
             colaClientes.add(cliente);
         }

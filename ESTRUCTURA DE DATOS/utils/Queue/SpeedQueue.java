@@ -1,106 +1,118 @@
-package TP4.Punto5;
+package utils.Queue;
 
-public class ColaCircular<T> {
+public class SpeedQueue<E> {
     private final static Integer defaultDimension = 10;
-    private T[] queue;
+    private E[] data;
     private int head;
     private int tail;
 
-    public ColaCircular() {
+    /** Constructor sin parámetros (usa la dimensión por defecto) **/
+    public SpeedQueue() {
         this(defaultDimension);
     }
 
+    /** Constructor con dimensión específica **/
     @SuppressWarnings("unchecked")
-    public ColaCircular(int dimension) {
-        this.queue = (T[]) new Object[dimension + 1]; // Inicializa el array
+    public SpeedQueue(int dimension) {
+        this.data = (E[]) new Object[dimension + 1]; // Añade un espacio extra
         this.head = 0;
         this.tail = 0;
     }
 
-    // Método para obtener la posición siguiente de un elemento de la cola
+    /** Método para obtener la posición siguiente de un elemento de la cola **/
     private int next(int pos) {
         pos++;
-        if (pos >= this.queue.length) {
+        if (pos >= this.data.length) {
             pos = 0;
         }
         return pos;
     }
 
-    // Método para añadir un elemento a la cola
-    public void add(T element) {
+    /** Método para añadir un elemento al final la cola **/
+    public void add(E element) {
         if (this.isFull()) {
             throw new IllegalStateException("Cola llena");
 
         }
-        this.queue[this.tail] = element; // Añade el elemento a donde apunta el tail
+        this.data[this.tail] = element; // Añade el elemento a donde apunta el tail
         this.tail = this.next(this.tail); // Ahora el tail apunta a la siguiente posición
     }
 
-    // Método para añadir un elemento sin lanzar excepción en caso de error
-    public boolean offer(T element) {
+    /**
+     * Método para añadir un elemento al final sin lanzar excepción en caso de error
+     **/
+    public boolean offer(E element) {
         if (this.isFull()) {
             return false;
         }
-        this.queue[this.tail] = element;
+        this.data[this.tail] = element;
         this.tail = this.next(this.tail);
         return true;
     }
 
-    // Método para devolver el primer elemento sin eliminarlo (lanza excepción si
-    // está vacía)
-    public T element() {
+    /**
+     * Método para devolver el primer elemento sin eliminarlo (lanza excepción si
+     * está vacía)
+     **/
+    public E element() {
         if (this.isEmpty()) {
             throw new IllegalStateException("Cola vacía");
         }
-        return this.queue[head];
+        return this.data[head];
     }
 
-    // Método para devolver el primer elemento sin eliminarlo (no lanza excepción,
-    // devuelve null)
-    public T peek() {
+    /**
+     * Método para devolver el primer elemento sin eliminarlo (no lanza excepción,
+     * devuelve null)
+     **/
+    public E peek() {
         if (this.isEmpty()) {
             return null;
         }
-        return this.queue[this.head];
+        return this.data[this.head];
     }
 
-    // Método para eliminar y devolver el primer elemento (lanza excepción si está
-    // vacía)
-    public T remove() {
+    /**
+     * Método para eliminar y devolver el primer elemento (lanza excepción si
+     * está vacía)
+     **/
+    public E remove() {
         if (this.isEmpty()) {
             throw new IllegalStateException("Cola vacía");
         }
-        T element = this.queue[this.head];
+        E element = this.data[this.head];
         this.head = this.next(this.head);
         return element;
     }
 
-    // Método para eliminar y devolver el primer elemento (retorna null si está
-    // vacía)
-    public T poll() {
+    /**
+     * Método para eliminar y devolver el primer elemento (retorna null si está
+     * vacía)
+     **/
+    public E poll() {
         if (this.isEmpty()) {
             return null;
         }
-        T element = this.queue[this.head];
+        E element = this.data[this.head];
         this.head = this.next(this.head);
         return element;
     }
 
-    // Método para obtener el tamaño actual de la cola
+    /** Método para obtener el tamaño actual de la cola **/
     public int size() {
         if (this.tail >= this.head) {
             return this.tail - this.head;
         } else {
-            return this.queue.length - this.head + this.tail;
+            return this.data.length - this.head + this.tail;
         }
     }
 
-    // Método para verificar si la cola está vacía
+    /** Método para verificar si la cola está vacía **/
     public boolean isEmpty() {
         return this.head == this.tail;
     }
 
-    // Método para verificar si la cola está llena
+    /** Método para verificar si la cola está llena **/
     public boolean isFull() {
         return this.next(this.tail) == this.head;
     }

@@ -1,4 +1,4 @@
-package CLASES.List;
+package utils.List;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -10,11 +10,11 @@ import java.util.NoSuchElementException;
  * Hace que la lista sea compatible con el bucle for-each
  **/
 
-public class MyIterator<E> implements Iterator<E> {
-    private Node<E> actual;
+public class SimpleLinkedListIterator<E> implements Iterator<E> {
+    private Node<E> current;
 
-    public MyIterator(Node<E> head) {
-        this.actual = head; // Comenzar desde el inicio de la lista
+    public SimpleLinkedListIterator(Node<E> head) {
+        this.current = head; // Comenzar desde el inicio de la lista
     }
 
     /*
@@ -24,7 +24,7 @@ public class MyIterator<E> implements Iterator<E> {
      */
     @Override
     public boolean hasNext() {
-        return this.actual != null; // Hay más elementos si current no es null
+        return this.current != null; // Hay más elementos si current no es null
     }
 
     /**
@@ -36,8 +36,8 @@ public class MyIterator<E> implements Iterator<E> {
         if (!this.hasNext()) {
             throw new NoSuchElementException("No hay más elementos en la lista");
         }
-        E item = this.actual.item; // Guardar el elemento actual
-        this.actual = this.actual.next; // Avanzar al siguiente nodo
+        E item = this.current.item; // Guardar el elemento actual
+        this.current = this.current.next; // Avanzar al siguiente nodo
         return item; // Devolver el elemento
     }
 
