@@ -2,9 +2,8 @@ package TP5.Punto1;
 
 import java.time.LocalDate;
 import java.util.Scanner;
-
-import utils.validaciones;
-import utils.List.SingleLinkedList;
+import TP5.Punto1.SingleLinkedList;
+import TP5.Punto1.Empleado;
 
 /**
  * Implementar una clase “ListaEnlazadaSimple” que permita insertar, eliminar,
@@ -61,7 +60,7 @@ public class Main {
         int legajo = validaciones.validarNumero(input, "Legajo: ");
         int dni = validaciones.validarDni(input, "Dni: ");
         String nombre = validaciones.validarTextoIngresado(input, "Nombre: ");
-        LocalDate fecha = validaciones.validarFormatoFecha(input, "yyyy-MM-dd", "Fecha de nacimiento");
+        LocalDate fecha = validaciones.validarFormatoFecha(input, "yyyy-MM-dd", "Fecha de nacimiento: ");
         String correo = validaciones.validarMail(input, "Correo: ");
 
         Empleado empleado = new Empleado(legajo, dni, nombre, fecha, correo, 12);

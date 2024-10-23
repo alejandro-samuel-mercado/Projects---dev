@@ -10,7 +10,8 @@ public class PARCIAL {
 
         /** -----------Punto 1---------- */
 
-        // a)
+        // a) Dada la clase empleados cargados en una cola inicial, devolver una cola
+        // con los empleados que tienen una edad mayor a una edad ingresasa
         Queue<Empleado> inicial = new Queue<>();
         Queue<Empleado> mayores = new Queue<>();
         inicial.add(new Empleado(0, 0, "Lalo", null, null, 12, 200.50));
@@ -24,7 +25,8 @@ public class PARCIAL {
         }
         System.out.println("-------------------");
 
-        // b)
+        // b)Calcular el promedio del sueldo de los empleados de la cola inicial o la
+        // cola de mayores
         promedioSueldo(mayores, inicial, input);
 
         /*------------- Punto 2------- */
@@ -36,13 +38,15 @@ public class PARCIAL {
         }
 
         /** -------Punto 3-------- */
-        // a)
+        // a) Dados dos vectores unidimensionales, devolver otro vector con los
+        // elementos de A que no están en B
         int A[] = { 1, 2, 3, 4, 5 };
         int B[] = { 2, 4, 5, 6, 7 };
         diferenciaAB(A, B);
         System.out.println("");
 
-        // b)
+        // b) Dado un número, encontrar los valores de A que son múltiplos de dicho
+        // número
         esMultiplo(A, 2);
 
         /*------- Punto 4 -----------*/
