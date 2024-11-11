@@ -1,7 +1,6 @@
 package TP4.Punto1;
 
 import java.util.Scanner;
-
 import utils.validaciones;
 import utils.Queue.*;
 

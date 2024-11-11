@@ -12,10 +12,9 @@ import utils.List.DoublyLinkedList;
  */
 public class Main {
     public static void main(String[] args) {
-        DoublyLinkedList<Integer> lista1 = new DoublyLinkedList<>();
-        listasAgregadas(lista1);
-
         Scanner input = new Scanner(System.in);
+        DoublyLinkedList<Integer> lista1 = new DoublyLinkedList<>();
+        listasAgregadas(lista1, input);
         boolean salir = false;
         int opcion;
 
@@ -29,10 +28,12 @@ public class Main {
             opcion = validaciones.validarNumero(input, "");
             switch (opcion) {
                 case 1:
-                    lista1.travelNext();
+                    travelNext(lista1);
+                    // lista1.travelNext();
                     break;
                 case 2:
-                    lista1.travelBack();
+                    travelBack(lista1);
+                    // lista1.travelBack();
                     break;
                 case 3:
                     System.out.println("Saliendo......");
@@ -44,10 +45,40 @@ public class Main {
         } while (!salir);
     }
 
-    public static void listasAgregadas(DoublyLinkedList<Integer> lista1) {
+    public static void listasAgregadas(DoublyLinkedList<Integer> lista1, Scanner input) {
         for (int i = 0; i < 10; i++) {
-            int num = (int) (Math.random() * 100);
+            int num = input.nextInt();
             lista1.addLast(num);
+        }
+    }
+
+    public static void travelNext(DoublyLinkedList<Integer> lista1) {
+        DoublyLinkedList<Integer> aux = new DoublyLinkedList<>();
+        while (!lista1.isEmpty()) {
+            Integer element = lista1.removeFirst();
+            System.out.printf(element + " ");
+            System.out.println("");
+
+            aux.addLast(element);
+        }
+
+        while (!aux.isEmpty()) {
+            lista1.addLast(aux.removeFirst());
+        }
+    }
+
+    public static void travelBack(DoublyLinkedList<Integer> lista1) {
+        DoublyLinkedList<Integer> aux = new DoublyLinkedList<>();
+        while (!lista1.isEmpty()) {
+            Integer element = lista1.removeLast();
+            System.out.printf(element + " ");
+            System.out.println("");
+
+            aux.addFirst(element);
+        }
+
+        while (!aux.isEmpty()) {
+            lista1.addLast(aux.removeFirst());
         }
     }
 

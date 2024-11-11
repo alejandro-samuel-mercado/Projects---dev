@@ -256,9 +256,10 @@ public class SingleLinkedList<E> implements ILinkedList<E> {
                     prev.next = newNode; // Conectar el nodo anterior con el nuevo nodo
                 }
             }
-        }
 
+        }
         this.size++;
+
     }
 
     /** Verificar si la lista está vacía */

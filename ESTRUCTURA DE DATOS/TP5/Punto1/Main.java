@@ -2,8 +2,6 @@ package TP5.Punto1;
 
 import java.time.LocalDate;
 import java.util.Scanner;
-import TP5.Punto1.SingleLinkedList;
-import TP5.Punto1.Empleado;
 
 /**
  * Implementar una clase “ListaEnlazadaSimple” que permita insertar, eliminar,
@@ -70,17 +68,24 @@ public class Main {
     public static void eliminarEmpleado(Scanner input, SingleLinkedList<Empleado> empleados) {
         int dniAEliminar = validaciones.validarNumero(input,
                 "-----------------\nDNI del empleado a eliminar: ");
+        boolean encontrado = false;
         for (Empleado empleado : empleados) {
             if (empleado.getDni() == dniAEliminar) {
                 empleados.remove(empleado);
+                encontrado = true;
                 System.out.println("-----\nEliminado!");
                 break;
+
             }
+        }
+        if (!encontrado) {
+            System.out.println("Empleado no encontrado");
         }
     }
 
     public static String buscarEmpledo(Scanner input, SingleLinkedList<Empleado> empleados) {
         int dniABuscar = validaciones.validarNumero(input, "DNI del empleado a buscar: ");
+
         for (Empleado empleado : empleados) {
             if (empleado.getDni() == dniABuscar) {
                 return empleado.toString();

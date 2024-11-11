@@ -1,4 +1,4 @@
-package utils.BinaryTree;
+package TP06_Arboles.Punto3;
 
 public class BinaryTree<ELEMENT> {
     // region Binary Tree Node Class
@@ -60,7 +60,10 @@ public class BinaryTree<ELEMENT> {
         }
     }
 
+    // endregion
+
     @Override
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         toString(sb, this.root);
@@ -70,23 +73,27 @@ public class BinaryTree<ELEMENT> {
     protected void toString(StringBuilder sb, BTNode<ELEMENT> root) {
         if (root != null) {
             sb.append(root.item.toString());
-            if (root.left != null) {
+
+            if (root.left != null || root.right != null) {
                 sb.append("(");
-                toString(sb, root.left);
 
-                if (root.right != null) {
-                    sb.append(",");
-                    toString(sb, root.right);
+                // Agregar el subárbol izquierdo
+                if (root.left != null) {
+                    toString(sb, root.left);
+                } else {
+                    sb.append("null");
                 }
+
+                sb.append(",");
+
+                // Agregar el subárbol derecho
+                if (root.right != null) {
+                    toString(sb, root.right);
+                } else {
+                    sb.append("null");
+                }
+
                 sb.append(")");
-
-            } else {
-                if (root.right != null) {
-                    sb.append("(,");
-                    toString(sb, root.right);
-                    sb.append(",");
-                    sb.append(")");
-                }
             }
         }
     }
@@ -205,5 +212,4 @@ public class BinaryTree<ELEMENT> {
     public int height() {
         return maxLevel() + 1;
     }
-
 }

@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 import utils.validaciones;
 import utils.List.DoublyLinkedList;
+import utils.List.DoublyLinkedLista;
+import TP5.Punto2.Alumno;
 
 /**
  * Crear una clase “Lista Doblemente Enlazada” con métodos para insertar
@@ -21,13 +23,13 @@ import utils.List.DoublyLinkedList;
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        DoublyLinkedList<Alumno> alumnos = new DoublyLinkedList<>();
+        DoublyLinkedLista<Alumno> alumnos = new DoublyLinkedLista<>();
         boolean salir = false;
         int opcion;
         do {
             System.out.println("\n--- Menú Gestión---");
             System.out.println("1. Agregar alumno al final de la lista");
-            System.out.println("1. Agregar alumno al principio de la lisata");
+            System.out.println("1. Agregar alumno al principio de la lista");
             System.out.println("1. Agregar alumno en una ubicación específica");
             System.out.println("4. Mostrar alumnos");
             System.out.println("5. Salir");
@@ -44,7 +46,7 @@ public class Main {
                     añadirEnUnaUbicacion(alumnos, input);
                     break;
                 case 4:
-                    alumnos.mostrar();
+                    System.out.println(alumnos.toString());
                     break;
                 case 5:
                     System.out.println("Saliendo......");
@@ -73,19 +75,19 @@ public class Main {
         return alumno;
     }
 
-    public static void añadirAlFinal(DoublyLinkedList<Alumno> alumnos, Scanner input) {
+    public static void añadirAlFinal(DoublyLinkedLista<Alumno> alumnos, Scanner input) {
         Alumno alumno = añadirAlumno(input);
         alumnos.addLast(alumno);
         System.out.println("--------\nAlumno añadido al final\n---------\n");
     }
 
-    public static void añadirAlInicio(DoublyLinkedList<Alumno> alumnos, Scanner input) {
+    public static void añadirAlInicio(DoublyLinkedLista<Alumno> alumnos, Scanner input) {
         Alumno alumno = añadirAlumno(input);
         alumnos.addFirst(alumno);
         System.out.println("--------\nAlumno añadido al principio\n---------\n");
     }
 
-    public static void añadirEnUnaUbicacion(DoublyLinkedList<Alumno> alumnos, Scanner input) {
+    public static void añadirEnUnaUbicacion(DoublyLinkedLista<Alumno> alumnos, Scanner input) {
         Alumno alumno = añadirAlumno(input);
         int ubicación = validaciones.validarNumero(input, "---------\nUbicación en la lista: ");
         alumnos.addAtPosition(ubicación, alumno);

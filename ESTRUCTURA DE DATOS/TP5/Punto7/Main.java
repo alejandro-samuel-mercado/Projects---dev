@@ -16,6 +16,7 @@ import utils.validaciones;
  * presenta los detalles de la clase SimpleLinkedList<ELEMENT>.
  **/
 public class Main {
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Queue<Integer> cola = new Queue<>();
@@ -50,6 +51,7 @@ public class Main {
 
     public static void calcularPromedio(Queue<Integer> cola) {
         int suma = 0;
+        double promedio = 0.0;
         Queue<Integer> colaAux = new Queue<>();
         while (!cola.isEmpty()) {
             Integer element = cola.poll();
@@ -59,7 +61,7 @@ public class Main {
         while (!colaAux.isEmpty()) {
             cola.add(colaAux.poll());
         }
-        Double promedio = (double) (suma / cola.size());
+        promedio = (double) (suma / cola.size());
 
         System.out.printf("---------\nPromedio: " + promedio + "\n--------------");
     }

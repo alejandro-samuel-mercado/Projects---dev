@@ -100,17 +100,16 @@ public class PARCIAL {
     }
 
     public static boolean verificarPalindromo(String palabra) {
-        String palabra_ = palabra.toLowerCase();
-        Stack<Character> pila = new Stack<>();
-        for (int i = 0; i < palabra_.length(); i++) {
-            pila.push(palabra_.charAt(i));
+        Stack<Character> pila = new Stack<>(palabra.length());
+        for (int i = 0; i < palabra.length(); i++) {
+            pila.push(palabra.charAt(i));
         }
         String palabraAlreves = "";
         while (!pila.isEmpty()) {
             palabraAlreves += pila.pop();
         }
 
-        if (palabra_.equals(palabraAlreves.toLowerCase())) {
+        if (palabra.equalsIgnoreCase(palabraAlreves)) {
             return true;
         }
         return false;

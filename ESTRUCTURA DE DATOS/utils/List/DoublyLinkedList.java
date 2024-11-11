@@ -5,7 +5,7 @@ import java.util.Iterator;
 /**
  * DoubleLinkedList
  */
-public class DoublyLinkedList<E> implements ILinkedList<E> {
+public class DoublyLinkedList<E extends Comparable<E>> implements ILinkedList<E> {
 
     private Node<E> head; // Inicio
     private Node<E> tail; // Fin
@@ -18,9 +18,13 @@ public class DoublyLinkedList<E> implements ILinkedList<E> {
         this.size = 0;
     }
 
+    public Node<E> getHead() {
+        return this.head;
+    }
+
     /** Agregar un elemento al principio de la lista */
     public void addFirst(E item) {
-        Node<E> newNode = new Node<>(item, this.head, null); // Crear un nuevo nodo
+        Node<E> newNode = new Node<>(item, null, null); // Crear un nuevo nodo
         if (isEmpty()) {
             this.head = this.tail = newNode; // Si la lista está vacía, head y tail son el nuevo nodo
         } else {
@@ -50,7 +54,7 @@ public class DoublyLinkedList<E> implements ILinkedList<E> {
      * enlazada,
      * manteniendo la integridad de las referencias de nodos adyacentes.
      **/
-    public void BetterAddFirst(E item) {
+    public void betterAddFirst(E item) {
         Node<E> newNode = new Node<>(item, this.head, null); // Crear un nuevo nodo
         if (isEmpty()) {
             this.tail = newNode; // Si la lista está vacía, head y tail son el nuevo nodo
@@ -61,7 +65,7 @@ public class DoublyLinkedList<E> implements ILinkedList<E> {
         this.size++; // Incrementar el tamaño
     }
 
-    public void BetterAddLast(E item) {
+    public void betterAddLast(E item) {
         Node<E> newNode = new Node<>(item, null, this.tail); // Crear un nuevo nodo
         if (isEmpty()) {
             this.head = newNode; // Si la lista está vacía, head y tail son el nuevo nodo
@@ -84,7 +88,7 @@ public class DoublyLinkedList<E> implements ILinkedList<E> {
             this.addLast(item);
         } else {
             Node<E> current = this.head;
-            for (int i = 0; i < position; i++) {
+            for (int i = 0; i < position - 1; i++) {
                 current = current.next; // Avanzar hasta la posición deseada
             }
             Node<E> newNode = new Node<>(item, current, current.prev);
@@ -92,8 +96,9 @@ public class DoublyLinkedList<E> implements ILinkedList<E> {
                 current.prev.next = newNode; // Conectar el nodo anterior con el nuevo nodo
             }
             current.prev = newNode; // Conectar el nuevo nodo con el nodo actual
+            this.size++;
         }
-        this.size++;
+
     }
 
     /** Eliminar el primer elemento de la lista */
@@ -101,13 +106,11 @@ public class DoublyLinkedList<E> implements ILinkedList<E> {
         if (isEmpty()) {
             throw new IllegalStateException("La lista está vacía.");
         }
-
         E item = this.head.item; // Obtener el elemento
-        this.head = this.head.next; // Avanzar el primer nodo al siguiente
-
-        if (this.head == null) { // Si la lista se queda vacía
-            this.tail = null; // También establecer tail a null
+        if (this.head == this.tail) { // Si la lista se queda vacía
+            this.tail = this.head = null; // También establecer tail a null
         } else {
+            this.head = this.head.next;
             this.head.prev = null; // Limpiar la referencia anterior del nuevo head
         }
         this.size--; // Decrementar el tamaño
@@ -123,7 +126,6 @@ public class DoublyLinkedList<E> implements ILinkedList<E> {
         E item = this.tail.item; // Guardar el elemento a eliminar
 
         if (this.head == this.tail) { // Si solo hay un elemento, también se usa if(this.head.next==null)
-            this.head = this.tail = null;
             this.head = this.tail = null; // Limpiar la lista
         } else {
             this.tail = this.tail.prev; // Actualizar tail al nodo anterior
@@ -144,22 +146,27 @@ public class DoublyLinkedList<E> implements ILinkedList<E> {
             return;
         }
 
-        Node<E> current = this.head; // Comenzar desde head
-        while (current != null) {
-            if (current.item.equals(element)) { // Si encontramos el elemento
-                if (current.prev != null) {
-                    current.prev.next = current.next; // Desconectar el nodo
+        else if (this.tail.item.equals(element)) { // Si el elemento es el primero
+            removeLast();
+            return;
+        } else {
+            Node<E> current = this.head; // Comenzar desde head
+            while (current != null) {
+                if (current.item.equals(element)) { // Si encontramos el elemento
+                    if (current.prev != null) {
+                        current.prev.next = current.next; // Desconectar el nodo
+                    }
+                    if (current.next != null) {
+                        current.next.prev = current.prev; // Desconectar el nodo
+                    }
+                    if (current == this.tail) { // Si eliminamos el tail
+                        this.tail = current.prev; // Actualizar tail
+                    }
+                    this.size--; // Decrementar tamaño
+                    return;
                 }
-                if (current.next != null) {
-                    current.next.prev = current.prev; // Desconectar el nodo
-                }
-                if (current == this.tail) { // Si eliminamos el tail
-                    this.tail = current.prev; // Actualizar tail
-                }
-                this.size--; // Decrementar tamaño
-                return;
+                current = current.next; // Continuar con el siguiente nodo
             }
-            current = current.next; // Continuar con el siguiente nodo
         }
     }
 
@@ -181,7 +188,6 @@ public class DoublyLinkedList<E> implements ILinkedList<E> {
                 node = node.next;
             }
             element = node.item;
-            return element;
         }
         return element;
     }
@@ -201,7 +207,7 @@ public class DoublyLinkedList<E> implements ILinkedList<E> {
             Node<E> innerCurrent = current.next;
 
             // Recorrer la lista con el segundo puntero para encontrar duplicados
-            while (innerCurrent != null) {
+            while (innerCurrent.next != null) {
                 if (current.item.equals(innerCurrent.item)) {
                     Node<E> duplicate = innerCurrent; // Eliminar el nodo duplicado
 
@@ -246,43 +252,47 @@ public class DoublyLinkedList<E> implements ILinkedList<E> {
      * Sirve para insertar un elemento en la lista manteniendo el
      * orden ascendente o descendente de los elementos.
      * 
-     * 
-     * public void AddInOrder(E item) {
-     * // Si la lista está vacía, agrega el nuevo nodo como head y tail
-     * if (this.size == 0) {
-     * this.head = this.tail = new Node<>(item, null, null);
-     * } else {
-     * // Si el elemento es menor o igual al elemento en la cabeza, agregar al
-     * // principio
-     * if (item.compareTo(this.head.item) <= 0) {
-     * this.addFirst(item);
-     * }
-     * // Si el elemento es mayor que el último elemento, agregar al final
-     * else if (item.compareTo(this.tail.item) > 0) {
-     * this.addLast(item);
-     * }
-     * // Si el elemento debe estar en algún punto intermedio
-     * else {
-     * Node<E> current = this.head;
-     * // Recorrer la lista para encontrar la posición correcta
-     * while (current != null && item.compareTo(current.item) > 0) {
-     * current = current.next;
-     * }
-     * // Insertar el nuevo nodo antes del nodo encontrado
-     * Node<E> newNode = new Node<>(item, current, current.prev);
-     * if (current.prev != null) {
-     * current.prev.next = newNode; // Conectar el nodo anterior con el nuevo nodo
-     * }
-     * current.prev = newNode; // Conectar el nuevo nodo con el nodo actual
-     * if (current == this.head) {
-     * this.head = newNode; // Actualizar head si es necesario
-     * }
-     * }
-     * }
-     * 
-     * this.size++;
-     * }
-     **/
+     */
+    public void AddInOrder(E item) {
+        // Si la lista está vacía, agrega el nuevo nodo como head y tail
+        if (this.size == 0) {
+            this.head = this.tail = new Node<>(item, null, null);
+        } else {
+            // Si el elemento es menor o igual al elemento en la cabeza, agregar al
+            // principio
+            if (item.compareTo(this.head.item) <= 0) {
+                this.addFirst(item);
+            }
+            // Si el elemento es mayor que el último elemento, agregar al final
+            else if (item.compareTo(this.tail.item) > 0) {
+                this.addLast(item);
+            }
+            // Si el elemento debe estar en algún punto intermedio
+            else {
+                Node<E> current = this.head;
+                // Recorrer la lista para encontrar la posición correcta
+                while (current != null && item.compareTo(current.item) > 0) {
+                    current = current.next;
+                }
+                // Insertar el nuevo nodo antes del nodo encontrado
+                Node<E> newNode = new Node<>(item, current, current.prev);
+                if (current.prev != null) {
+                    current.prev.next = newNode; // Conectar el nodo anterior con el nuevo nodo
+                }
+                current.prev = newNode; // Conectar el nuevo nodo con el nodo actual
+                if (current == this.head) {
+                    this.head = newNode; // Actualizar head si es necesario
+
+                } else {
+                    // Asegurar que el nodo previo a current se conecta al nuevo nodo
+                    newNode.prev.next = newNode;
+                }
+            }
+        }
+
+        this.size++;
+
+    }
 
     /** Verificar si la lista está vacía */
     public boolean isEmpty() {
@@ -297,12 +307,12 @@ public class DoublyLinkedList<E> implements ILinkedList<E> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        Node<E> recorrer = head;
-        while (recorrer != null) {
-            sb.append(recorrer.getItem()).append(" <->\n");
-            recorrer = recorrer.getNext();
+        Node<E> current = this.head;
+        while (current != null) {
+            sb.append(current.item).append(" <->\n");
+            current = current.next;
         }
-        return sb.length() > 0 ? sb.substring(0, sb.length() - 5) : "Lista vacía";
+        return sb.toString();
     }
 
     public void mostrar() {
@@ -333,6 +343,14 @@ public class DoublyLinkedList<E> implements ILinkedList<E> {
     @Override
     public Iterator<E> iterator() {
         return new SimpleLinkedListIterator<>(head);
+    }
+
+    public E ultimoElemento(){
+        if(this.size<=0){
+            throw new IllegalStateException("vacio");
+        }
+        E element=this.tail.item;
+        return element;
     }
 
 }

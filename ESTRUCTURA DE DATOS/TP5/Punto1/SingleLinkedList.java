@@ -3,10 +3,6 @@ package TP5.Punto1;
 import java.util.Comparator;
 import java.util.Iterator;
 
-import TP5.Punto1.validaciones;
-import TP5.Punto1.Node;
-import TP5.Punto1.SimpleLinkedListIterator;
-
 /**
  * SingleLinkedList
  */
@@ -40,7 +36,7 @@ public class SingleLinkedList<E> implements ILinkedList<E> {
      * enlazada,
      * manteniendo la integridad de las referencias de nodos adyacentes.
      **/
-    public void BetterAddFirst(E item) {
+    public void betterAddFirst(E item) {
         Node<E> newNode = new Node<>(item, this.head);// Se crea un nodo con el elemento a agregar
         if (isEmpty()) {
             this.tail = newNode; // El nuevo nodo es el único elemento y, por lo tanto, también el último
@@ -56,12 +52,12 @@ public class SingleLinkedList<E> implements ILinkedList<E> {
             this.head = this.tail = newNode;
         } else {
             this.tail.next = newNode;
-            this.tail = this.tail.next;
+            this.tail = this.tail.next; // o this.tail= newNode;
         }
         this.size++;
     }
 
-    public void BetterAddLAst(E item) {
+    public void betterAddLast(E item) {
         Node<E> newNode = new Node<>(item, null);// Se crea un nodo con el elemento a agregar
         if (isEmpty()) {
             this.head = newNode; // El nuevo nodo es el único elemento y, por lo tanto, también el último
@@ -88,8 +84,9 @@ public class SingleLinkedList<E> implements ILinkedList<E> {
             }
             Node<E> newNode = new Node<>(item, current.next);
             current.next = newNode; // Conectar el nodo anterior con el nuevo nodo
+            this.size++;
         }
-        this.size++;
+
     }
 
     /** Eliminar el primer elemento de la lista */
@@ -98,11 +95,12 @@ public class SingleLinkedList<E> implements ILinkedList<E> {
             throw new IllegalStateException("La lista está vacía.");
         }
         E item = this.head.item; // Toma el elemento que está en el primer nodo
-        this.head = this.head.next; // Avanza el primer nodo al siguiente
-        if (this.head == null) { // Si solo hay un elemento
-            this.tail = null;
+        if (this.head == this.tail) { // Si solo hay un elemento
+            this.head = this.tail = null;
+        } else {
+            this.head = this.head.next; // Avanza el primer nodo al siguiente
         }
-        --this.size;
+        this.size--;
         return item;
     }
 
@@ -112,18 +110,18 @@ public class SingleLinkedList<E> implements ILinkedList<E> {
             throw new IllegalStateException("La lista está vacía.");
         }
 
-        E item = this.head.item; // Toma el elemento que está en el primer nodo
-        if (this.head == this.tail) { // Si solo hay un elemento , también se usa if(this.head.next==null)
+        E item = this.tail.item; // Toma el elemento que está en el último nodo
+        if (this.head == this.tail) {
             this.head = this.tail = null;
         } else {
             Node<E> current = this.head;
             while (current.next != tail) { // Encontrar el penúltimo nodo
                 current = current.next;
             }
-            tail = current; // Actualiza tail al penúltimo nodo
-            tail.next = null; // Anula la referencia al siguente nodo
+            this.tail = current; // Actualiza tail al penúltimo nodo
+            this.tail.next = null; // Anula la referencia al siguente nodo
         }
-        --this.size;
+        this.size--;
         return item;
     }
 
@@ -133,26 +131,26 @@ public class SingleLinkedList<E> implements ILinkedList<E> {
             return; // No hay nada que eliminar
         }
 
-        if (head.item.equals(element)) { // Si el elemento es el primero
+        if (this.head.item.equals(element)) { // Si el elemento es el primero
             removeFirst();
             return;
-        }
-        if (tail.item.equals(element)) {// Si el elemento es el último
+        } else if (this.tail.item.equals(element)) {// Si el elemento es el último
             removeLast();
             return;
-        }
 
-        Node<E> current = head; // Comenzar desde head
-        while (current.next != null) {
-            if (current.next.item.equals(element)) { // Si encontramos el elemento
-                current.next = current.next.next; // Desconectar el nodo
-                if (current.next == null) { // Si eliminamos el tail
-                    tail = current; // Actualizar tail
+        } else {
+            Node<E> current = this.head; // Comenzar desde head
+            while (current.next != null) {
+                if (current.next.item.equals(element)) { // Si encontramos el elemento
+                    current.next = current.next.next; // Desconectar el nodo
+                    if (current.next == null) { // Si eliminamos el tail
+                        this.tail = current; // Actualizar tail
+                    }
+                    this.size--; // Decrementar tamaño
+                    return;
                 }
-                size--; // Decrementar tamaño
-                return;
+                current = current.next; // Continuar con el siguiente nodo
             }
-            current = current.next; // Continuar con el siguiente nodo
         }
     }
 
@@ -167,14 +165,19 @@ public class SingleLinkedList<E> implements ILinkedList<E> {
 
     /** Devolver elemento en una posición determinada **/
     public E get(int index) {
-        Node<E> node = this.head;
+        if (isEmpty()) {
+            throw new IllegalStateException("La lista está vacía.");
+        }
+        Node<E> current = this.head;
         E element = null;
         if (index >= 0 && index < this.size) {
             for (int i = 0; i < this.size && i != index; i++) {
-                node = node.next;
+                current = current.next;
             }
-            element = node.item;
-            return element;
+            element = current.item;
+
+        } else {
+            throw new IndexOutOfBoundsException("Indice no válido");
         }
         return element;
     }
@@ -188,7 +191,7 @@ public class SingleLinkedList<E> implements ILinkedList<E> {
 
     /** Eliminar elementos duplicados **/
     public void removeDuplicate() {
-        Node<E> current = head;
+        Node<E> current = this.head;
 
         // Recorrer la lista con el primer puntero
         while (current != null) {
@@ -226,7 +229,7 @@ public class SingleLinkedList<E> implements ILinkedList<E> {
 
     public void AddInOrder(E item, Comparator<? super E> compareTo) {
         // Si la lista está vacía, agrega el nuevo nodo como head y tail
-        if (this.size == 0) {
+        if (isEmpty()) {
             this.head = this.tail = new Node<>(item, null);
         } else {
             // Si el elemento es menor o igual al elemento en la cabeza, agregar al
@@ -267,7 +270,7 @@ public class SingleLinkedList<E> implements ILinkedList<E> {
 
     /** Verificar si la lista está vacía */
     public boolean isEmpty() {
-        return size == 0;
+        return size <= 0;
     }
 
     public int size() {
@@ -277,13 +280,17 @@ public class SingleLinkedList<E> implements ILinkedList<E> {
     /** Representación de la lista como una cadena */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        Node<E> recorrer = head;
-        while (recorrer != null) {
-            sb.append(recorrer.getItem()).append(" <-> ");
-            recorrer = recorrer.getNext();
+
+        if (isEmpty()) {
+            return "";
         }
-        return sb.length() > 0 ? sb.substring(0, sb.length() - 5) : "Lista vacía";
+        StringBuilder sb = new StringBuilder();
+        Node<E> current = this.head;
+        while (current != null) {
+            sb.append(current.item).append(" -> ");
+            current = current.next;
+        }
+        return sb.toString();
     }
 
     public void mostrar() {
@@ -292,10 +299,16 @@ public class SingleLinkedList<E> implements ILinkedList<E> {
 
     /** Obtener el primer elemento **/
     public E getFirst() {
+        if (isEmpty()) {
+            throw new IllegalStateException("La lista está vacía.");
+        }
         return this.head.item;
     }
 
     public E getLast() {
+        if (isEmpty()) {
+            throw new IllegalStateException("La lista está vacía.");
+        }
         return this.tail.item;
     }
 

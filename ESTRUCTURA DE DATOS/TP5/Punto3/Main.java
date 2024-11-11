@@ -2,7 +2,8 @@ package TP5.Punto3;
 
 import java.util.Scanner;
 import utils.validaciones;
-import utils.List.DoublyLinkedList;
+import utils.List.DoublyLinkedLista;
+import TP5.Punto3.Deuda;
 
 /**
  * Implementar métodos para eliminar elementos de una lista doblemente enlazada.
@@ -15,7 +16,7 @@ import utils.List.DoublyLinkedList;
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        DoublyLinkedList<Deuda> deudas = new DoublyLinkedList<>();
+        DoublyLinkedLista<Deuda> deudas = new DoublyLinkedLista<>();
         deudasAgregadas(deudas);
 
         boolean salir = false;
@@ -36,7 +37,7 @@ public class Main {
                     eliminarPorNombre(deudas, input);
                     break;
                 case 3:
-                    deudas.mostrar();
+                    System.out.println(deudas.toString());
                     break;
                 case 4:
                     System.out.println("Saliendo......");
@@ -48,7 +49,7 @@ public class Main {
         } while (!salir);
     }
 
-    public static void deudasAgregadas(DoublyLinkedList<Deuda> deudas) {
+    public static void deudasAgregadas(DoublyLinkedLista<Deuda> deudas) {
         Deuda[] deudasSave = {
                 new Deuda("D001", "Compra de insumos", "Juan Perez", "10-01-2024", 500.75),
                 new Deuda("D002", "Pago de servicios", "Maria Lopez", "15/01/2024", 250.50),
@@ -56,13 +57,12 @@ public class Main {
                 new Deuda("D004", "Compra de equipo", "Ana Morales", "25/01/2024", 1000.00),
                 new Deuda("D005", "Pago de alquiler", "Luis Fernandez", "30/01/2024", 750.00)
         };
-
         for (Deuda deuda : deudasSave) {
             deudas.addLast(deuda);
         }
     }
 
-    public static void eliminarPorCodigo(DoublyLinkedList<Deuda> deudas, Scanner input) {
+    public static void eliminarPorCodigo(DoublyLinkedLista<Deuda> deudas, Scanner input) {
         System.out.printf("Código a buscar: ");
         String codigo = input.nextLine();
 
@@ -76,7 +76,7 @@ public class Main {
 
     }
 
-    public static void eliminarPorNombre(DoublyLinkedList<Deuda> deudas, Scanner input) {
+    public static void eliminarPorNombre(DoublyLinkedLista<Deuda> deudas, Scanner input) {
         System.out.printf("Nombre del acreedor a buscar: ");
         String nombre = input.nextLine();
 

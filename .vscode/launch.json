@@ -6,6 +6,27 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "TP06_Arboles.Punto3.Main",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "TP6.Punto3.Main",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "TP6.Punto2.Main",
+      "projectName": "PROJECTS_163ab113"
+    },
+    {
+      "type": "java",
       "name": "seven",
       "request": "launch",
       "mainClass": "EjerciciosParcial.seven",

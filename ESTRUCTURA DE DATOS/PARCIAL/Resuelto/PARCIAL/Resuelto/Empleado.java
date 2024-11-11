@@ -6,12 +6,12 @@ public class Empleado {
     private int legajo;
     private int dni;
     private String nombre;
-    private LocalDate fechaNacimiento;
+    private String fechaNacimiento;
     private String correo;
     private int edad;
     private Double saldo;
 
-    public Empleado(int legajo, int dni, String nombre, LocalDate fecha, String correo, int edad, Double saldo) {
+    public Empleado(int legajo, int dni, String nombre, String fecha, String correo, int edad, Double saldo) {
         this.legajo = legajo;
         this.dni = dni;
         this.nombre = nombre;
@@ -29,7 +29,7 @@ public class Empleado {
         return correo;
     }
 
-    public LocalDate getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
